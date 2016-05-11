@@ -1,0 +1,27 @@
+{
+  "message":"ok",
+  "result":{
+    "stores":[
+      {
+        "id":270,
+        "name":"Amazon.com Marketplace",
+        "countryCode":"US"
+      },
+      {
+        "id":935,
+        "name":"coffee-and-sports.hostedbyamazon.com",
+        "countryCode":"US"
+      },
+      {
+        "id":4997,
+        "name":"Amazon Australia",
+        "countryCode":"AU"
+      },
+      {
+        "id":24,
+        "name":"Amazon.com",
+        "countryCode":"US"
+      }
+    ]
+  }
+}

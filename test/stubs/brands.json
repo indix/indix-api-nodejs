@@ -1,0 +1,11 @@
+{
+  "message":"ok",
+  "result":{
+    "brands":[
+      {
+        "id":5572,
+        "name":"Nike"
+      }
+    ]
+  }
+}

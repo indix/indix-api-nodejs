@@ -1,0 +1,25 @@
+{
+  "message":"ok",
+  "result":{
+    "categories":[
+      {
+        "id":10161,
+        "name":"Computers & Accessories",
+        "namePath":"Computers & Accessories",
+        "idPath":"10161"
+      },
+      {
+        "id":10162,
+        "name":"Sports & Outdoors",
+        "namePath":"Sports & Outdoors",
+        "idPath":"10162"
+      },
+      {
+        "id":10163,
+        "name":"Automotive",
+        "namePath":"Automotive",
+        "idPath":"10163"
+      }
+    ]
+  }
+}
