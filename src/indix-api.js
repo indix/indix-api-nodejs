@@ -72,12 +72,34 @@ export function getCategories(callback){
 
 }
 
-export function getProductSummary(query, callback){
+function getProductSearch(type, query, callback){
 
   query = query || {};
   _.assign(query, { appID: appID, appKey: appKey });
 
-  var endpoint = '/v2/summary/products';
+  var endpoint;
+
+  switch(type){
+    case 'Summary':
+      endpoint = '/v2/summary/products';
+      break;
+    case 'Offers Standard':
+      endpoint = '/v2/offersStandard/products';
+      break;
+    case 'Offers Premium':
+      endpoint = '/v2/offersPremium/products';
+      break;
+    case 'Catalog Standard':
+      endpoint = '/v2/catalogStandard/products';
+      break;
+    case 'Catalog Premium':
+      endpoint = '/v2/catalogPremium/products';
+      break;
+    case 'Universal':
+      endpoint = '/v2/universal/products';
+      break;
+  }
+
   var params = util.convertJSONToQueryParams(query);
   var url = HOST + endpoint + '?' + params;
   request(url, function (error, response, body) {
@@ -87,6 +109,30 @@ export function getProductSummary(query, callback){
         callback(r.result.products);
       }
     }
-  })
+  });
 
+}
+
+export function getProductSummary(query, callback){
+  getProductSearch('Summary', query, callback);
+}
+
+export function getProductOffersStandard(query, callback){
+  getProductSearch('Offers Standard', query, callback);
+}
+
+export function getProductOffersPremium(query, callback){
+  getProductSearch('Offers Premium', query, callback);
+}
+
+export function getProductCatalogStandard(query, callback){
+  getProductSearch('Catalog Standard', query, callback);
+}
+
+export function getProductCatalogPremium(query, callback){
+  getProductSearch('Catalog Premium', query, callback);
+}
+
+export function getProductUniversal(query, callback){
+  getProductSearch('Universal', query, callback);
 }

@@ -1,0 +1,363 @@
+{
+  "message":"ok",
+  "result":{
+    "count":2903,
+    "products":[
+      {
+        "categoryNamePath":"Additional",
+        "categoryId":99999,
+        "mpid":"afa68330a06bcceb4355ec900e50a37a",
+        "categoryName":"Additional",
+        "tags":[
+
+        ],
+        "upcs":[
+
+        ],
+        "brandName":"Other brands",
+        "attributes":{
+
+        },
+        "minSalePrice":62.94,
+        "brandId":999999,
+        "categoryIdPath":"99999",
+        "mpns":[
+
+        ],
+        "countryCode":"US",
+        "currency":"USD",
+        "facetAttributes":{
+
+        },
+        "title":"Nike Khyber Ski Goggles",
+        "lastRecordedAt":1461063096592,
+        "imageUrl":"http://ecx.images-amazon.com/images/I/41ylVprBNyL._AC_US160_.jpg",
+        "maxSalePrice":151.5,
+        "offersCount":4,
+        "storesCount":2
+      },
+      {
+        "categoryNamePath":"Additional",
+        "categoryId":99999,
+        "mpid":"92e818b85015ac5af44f4f9d1b4f8849",
+        "categoryName":"Additional",
+        "tags":[
+
+        ],
+        "upcs":[
+
+        ],
+        "brandName":"Other brands",
+        "attributes":{
+
+        },
+        "minSalePrice":90.3,
+        "brandId":999999,
+        "categoryIdPath":"99999",
+        "mpns":[
+
+        ],
+        "countryCode":"US",
+        "currency":"USD",
+        "facetAttributes":{
+
+        },
+        "title":"Nike Command Ski Goggles",
+        "lastRecordedAt":1461062684725,
+        "imageUrl":"http://ecx.images-amazon.com/images/I/317hc9s5FcL._AC_AA200_.jpg",
+        "maxSalePrice":300,
+        "offersCount":13,
+        "storesCount":2
+      },
+      {
+        "categoryNamePath":"Additional",
+        "categoryId":99999,
+        "mpid":"cd3147af2349aa1e7210bdb1b70a895b",
+        "categoryName":"Additional",
+        "tags":[
+
+        ],
+        "upcs":[
+
+        ],
+        "brandName":"Nike",
+        "attributes":{
+
+        },
+        "minSalePrice":14.27,
+        "brandId":5572,
+        "categoryIdPath":"99999",
+        "mpns":[
+          "9.301.002.101."
+        ],
+        "countryCode":"US",
+        "currency":"USD",
+        "facetAttributes":{
+
+        },
+        "title":"Nike Nmb Baseball White/Black",
+        "lastRecordedAt":1418545951353,
+        "imageUrl":"http://ecx.images-amazon.com/images/I/51QS-e-U23L._SY355_.jpg",
+        "maxSalePrice":14.27,
+        "offersCount":1,
+        "storesCount":1
+      },
+      {
+        "categoryNamePath":"Additional",
+        "categoryId":99999,
+        "mpid":"07a205d4e0949f3d549457d26d628e6b",
+        "categoryName":"Additional",
+        "tags":[
+
+        ],
+        "upcs":[
+
+        ],
+        "brandName":"Other brands",
+        "attributes":{
+
+        },
+        "minSalePrice":24.99,
+        "brandId":999999,
+        "categoryIdPath":"99999",
+        "mpns":[
+
+        ],
+        "countryCode":"US",
+        "currency":"USD",
+        "facetAttributes":{
+
+        },
+        "title":"Nike Fundamental 3mm Yoga Mat",
+        "lastRecordedAt":1461041418149,
+        "imageUrl":"http://ecx.images-amazon.com/images/I/41rvlDZ1l5L._AA200_.jpg",
+        "maxSalePrice":26.15,
+        "offersCount":3,
+        "storesCount":2
+      },
+      {
+        "categoryNamePath":"Additional",
+        "categoryId":99999,
+        "mpid":"6482e6a072ba70188ecfae6e7801ed94",
+        "categoryName":"Additional",
+        "tags":[
+
+        ],
+        "upcs":[
+
+        ],
+        "brandName":"Other brands",
+        "attributes":{
+
+        },
+        "minSalePrice":16.84,
+        "brandId":999999,
+        "categoryIdPath":"99999",
+        "mpns":[
+
+        ],
+        "countryCode":"US",
+        "currency":"USD",
+        "facetAttributes":{
+
+        },
+        "title":"Nike Men's Perforated Reversible Strap",
+        "lastRecordedAt":1453006608453,
+        "imageUrl":"http://ecx.images-amazon.com/images/I/31uGr-Gun7L._AA200_.jpg",
+        "maxSalePrice":40,
+        "offersCount":2,
+        "storesCount":2
+      },
+      {
+        "categoryNamePath":"Additional",
+        "categoryId":99999,
+        "mpid":"b838642c8d22b005f6b6a96a583efd7f",
+        "categoryName":"Additional",
+        "tags":[
+
+        ],
+        "upcs":[
+
+        ],
+        "brandName":"Other brands",
+        "attributes":{
+
+        },
+        "minSalePrice":219.95,
+        "brandId":999999,
+        "categoryIdPath":"99999",
+        "mpns":[
+
+        ],
+        "countryCode":"US",
+        "currency":"USD",
+        "facetAttributes":{
+
+        },
+        "title":"Nike Golf Men's Lunar Clayton Golf ShoeNike Golf",
+        "lastRecordedAt":1404001760040,
+        "imageUrl":"http://ecx.images-amazon.com/images/I/41ziUoI9wBL._AA200_.jpg",
+        "maxSalePrice":219.95,
+        "offersCount":2,
+        "storesCount":1
+      },
+      {
+        "categoryNamePath":"Additional",
+        "categoryId":99999,
+        "mpid":"b3399adabf02838b0acedf1d73a92f26",
+        "categoryName":"Additional",
+        "tags":[
+
+        ],
+        "upcs":[
+
+        ],
+        "brandName":"Other brands",
+        "attributes":{
+
+        },
+        "minSalePrice":140,
+        "brandId":999999,
+        "categoryIdPath":"99999",
+        "mpns":[
+
+        ],
+        "countryCode":"US",
+        "currency":"USD",
+        "facetAttributes":{
+
+        },
+        "title":"Nike Golf Men's TW '14 Golf ShoeNike Golf",
+        "lastRecordedAt":1404824282794,
+        "imageUrl":"http://ecx.images-amazon.com/images/I/41jpYw1kEYL._SL200_SY260_CR0,0,200,260_.jpg",
+        "maxSalePrice":242,
+        "offersCount":3,
+        "storesCount":2
+      },
+      {
+        "categoryNamePath":"Additional",
+        "categoryId":99999,
+        "mpid":"cffc46f115f15bae1349b7520ce3cb01",
+        "categoryName":"Additional",
+        "tags":[
+
+        ],
+        "upcs":[
+
+        ],
+        "brandName":"Other brands",
+        "attributes":{
+
+        },
+        "minSalePrice":122.06,
+        "brandId":999999,
+        "categoryIdPath":"99999",
+        "mpns":[
+
+        ],
+        "countryCode":"US",
+        "currency":"USD",
+        "facetAttributes":{
+
+        },
+        "title":"Nike Golf Men's Lunar Control2 SL Golf ShoeNike Golf",
+        "lastRecordedAt":1411352996403,
+        "imageUrl":"http://ecx.images-amazon.com/images/I/41c8BT6%2BBQL._AA200_.jpg",
+        "maxSalePrice":145,
+        "offersCount":6,
+        "storesCount":2
+      },
+      {
+        "categoryNamePath":"Additional",
+        "categoryId":99999,
+        "mpid":"c01525c57f334e8699c5fac59474ff71",
+        "categoryName":"Additional",
+        "tags":[
+
+        ],
+        "upcs":[
+
+        ],
+        "brandName":"Other brands",
+        "attributes":{
+
+        },
+        "minSalePrice":59.95,
+        "brandId":999999,
+        "categoryIdPath":"99999",
+        "mpns":[
+
+        ],
+        "countryCode":"US",
+        "currency":"USD",
+        "facetAttributes":{
+
+        },
+        "title":"Nike Golf Men's Nike Lunar Control II Golf Shoe",
+        "lastRecordedAt":1459439896329,
+        "imageUrl":"http://ecx.images-amazon.com/images/I/41c8BT6+BQL._AA160_.jpg",
+        "maxSalePrice":139.99,
+        "offersCount":2,
+        "storesCount":2
+      },
+      {
+        "categoryNamePath":"Additional",
+        "categoryId":99999,
+        "mpid":"6b967e1b9b2f567a9e34cd6a468b300f",
+        "categoryName":"Additional",
+        "tags":[
+
+        ],
+        "upcs":[
+          "00666032371992",
+          "00666032372531",
+          "00666032372098"
+        ],
+        "brandName":"Nike",
+        "attributes":{
+          "usage":[
+            "casuals"
+          ],
+          "uppermaterial":[
+            "leather"
+          ],
+          "sports":[
+            "golf"
+          ],
+          "insolematerial":[
+            "rubber"
+          ],
+          "outsolematerial":[
+            "rubber"
+          ],
+          "material":[
+            "leather"
+          ],
+          "waterresistancelevel":[
+            "water"
+          ]
+        },
+        "minSalePrice":49.99,
+        "brandId":5572,
+        "categoryIdPath":"99999",
+        "mpns":[
+          "Nike Lunar Duet Classic-W"
+        ],
+        "countryCode":"US",
+        "currency":"USD",
+        "facetAttributes":{
+
+        },
+        "title":"Nike Golf Women's Nike Lunar Duet Classic Golf Shoe",
+        "lastRecordedAt":1420974445822,
+        "imageUrl":"http://ecx.images-amazon.com/images/I/71U%2BDWZQaFL._UX500_.jpg",
+        "maxSalePrice":94.99,
+        "offersCount":12,
+        "storesCount":2
+      }
+    ],
+    "facets":{
+
+    }
+  }
+}
