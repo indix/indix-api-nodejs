@@ -71,3 +71,22 @@ export function getCategories(callback){
   })
 
 }
+
+export function getProductSummary(query, callback){
+
+  query = query || {};
+  _.assign(query, { appID: appID, appKey: appKey });
+
+  var endpoint = '/v2/summary/products';
+  var params = util.convertJSONToQueryParams(query);
+  var url = HOST + endpoint + '?' + params;
+  request(url, function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+      var r = JSON.parse(body);
+      if(r.message == 'ok'){
+        callback(r.result.products);
+      }
+    }
+  })
+
+}

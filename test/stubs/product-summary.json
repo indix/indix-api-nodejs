@@ -1,0 +1,268 @@
+{
+  "message":"ok",
+  "result":{
+    "count":1189626,
+    "products":[
+      {
+        "categoryNamePath":"Shoes > Men > Fashion Sneakers",
+        "categoryId":20082,
+        "mpid":"8e1d8cd338ada38624d2f9322b259402",
+        "categoryName":"Fashion Sneakers",
+        "upcs":[
+          "00884499652748",
+          "00091206081795",
+          "00091206081818",
+          "00884499652755"
+        ],
+        "brandName":"Nike",
+        "minSalePrice":45.02,
+        "brandId":5572,
+        "categoryIdPath":"10179 > 17421 > 20082",
+        "mpns":[
+          "ROSHERUN",
+          "511881-405"
+        ],
+        "countryCode":"US",
+        "currency":"USD",
+        "title":"Nike Men's Rosherun Running Shoe.",
+        "lastRecordedAt":1462486236868,
+        "imageUrl":"http://ecx.images-amazon.com/images/I/41N3coiimrL._AA200_.jpg",
+        "maxSalePrice":162.0,
+        "offersCount":212,
+        "storesCount":1
+      },
+      {
+        "categoryNamePath":"Shoes > Women > Athletic > Running",
+        "categoryId":24323,
+        "mpid":"7c6ad2c5168590a2cdfc6d1335e764f4",
+        "categoryName":"Running",
+        "upcs":[
+
+        ],
+        "brandName":"Nike",
+        "minSalePrice":51.05,
+        "brandId":5572,
+        "categoryIdPath":"10179 > 16238 > 16239 > 24323",
+        "mpns":[
+          "709021 016",
+          "709021 501"
+        ],
+        "countryCode":"US",
+        "currency":"USD",
+        "title":"Nike Women's Flex 2015 Rn Running Shoe",
+        "lastRecordedAt":1462672038790,
+        "imageUrl":"http://ecx.images-amazon.com/images/I/810L5hTOJQL._UX500_.jpg",
+        "maxSalePrice":99.99,
+        "offersCount":99,
+        "storesCount":4
+      },
+      {
+        "categoryNamePath":"Clothing & Accessories > Men > Active > Active Hoodies",
+        "categoryId":17148,
+        "mpid":"d03db9d84a61d51fc606eaa3c6a6d923",
+        "categoryName":"Active Hoodies",
+        "upcs":[
+          "00826218174575"
+        ],
+        "brandName":"Nike",
+        "minSalePrice":24.99,
+        "brandId":5572,
+        "categoryIdPath":"10166 > 16204 > 16233 > 17148",
+        "mpns":[
+          "611457-010",
+          "611457-611-XL",
+          "611457-473",
+          "611457-100",
+          "611457-071",
+          "611457-063"
+        ],
+        "countryCode":"US",
+        "currency":"USD",
+        "title":"NIKE CLUB PULLOVER SWOOSH HOODIE",
+        "lastRecordedAt":1461618070189,
+        "imageUrl":"http://cdnp.jimmyjazz.com/611717616/611717616_pink_nike_nike_club_pullover_swoosh_hoodie_lp1.jpg",
+        "maxSalePrice":107.1,
+        "offersCount":395,
+        "storesCount":7
+      },
+      {
+        "categoryNamePath":"Shoes > Handbags > Cross-body Bags",
+        "categoryId":23718,
+        "mpid":"d30061b1d8724c649da2d58320cd9a0d",
+        "categoryName":"Cross-body Bags",
+        "upcs":[
+
+        ],
+        "brandName":"Nike",
+        "minSalePrice":7.5,
+        "brandId":5572,
+        "categoryIdPath":"10179 > 16699 > 23718",
+        "mpns":[
+          "GYM-PACK"
+        ],
+        "countryCode":"US",
+        "currency":"USD",
+        "title":"Nike Team Training Gymsack",
+        "lastRecordedAt":1462713610506,
+        "imageUrl":"http://ecx.images-amazon.com/images/I/51rvn871VeL._UX385_.jpg",
+        "maxSalePrice":20.99,
+        "offersCount":17,
+        "storesCount":1
+      },
+      {
+        "categoryNamePath":"Clothing & Accessories > Men > Active > Active Shirts & Tees",
+        "categoryId":24135,
+        "mpid":"81fecb10fe49c1e9ed17058d7062f4f6",
+        "categoryName":"Active Shirts & Tees",
+        "upcs":[
+
+        ],
+        "brandName":"Nike",
+        "minSalePrice":12.0,
+        "brandId":5572,
+        "categoryIdPath":"10166 > 16204 > 16233 > 24135",
+        "mpns":[
+          "384407"
+        ],
+        "countryCode":"US",
+        "currency":"USD",
+        "title":"Nike Mens Athletic Active Dri-Fit Tee Shirt",
+        "lastRecordedAt":1462276524949,
+        "imageUrl":"http://ecx.images-amazon.com/images/I/51RcMAPZRrL._SX466_.jpg",
+        "maxSalePrice":49.99,
+        "offersCount":58,
+        "storesCount":2
+      },
+      {
+        "categoryNamePath":"Clothing & Accessories > Women > Leggings",
+        "categoryId":26167,
+        "mpid":"f370a1f6358c546dba03d5bcd8108d37",
+        "categoryName":"Leggings",
+        "upcs":[
+
+        ],
+        "brandName":"Other brands",
+        "minSalePrice":9.98,
+        "brandId":999999,
+        "categoryIdPath":"10166 > 16021 > 26167",
+        "mpns":[
+
+        ],
+        "countryCode":"US",
+        "currency":"USD",
+        "title":"Lokebi Womens Just Do It Print Side Text Stretchy Leggings",
+        "lastRecordedAt":1460894616375,
+        "imageUrl":"http://ecx.images-amazon.com/images/I/41YzyK4ziFL._AC_AA160_.jpg",
+        "maxSalePrice":11.98,
+        "offersCount":3,
+        "storesCount":1
+      },
+      {
+        "categoryNamePath":"Shoes > Men > Athletic > Running",
+        "categoryId":17538,
+        "mpid":"584b0dbe4d8a8329b77a831c71c570d0",
+        "categoryName":"Running",
+        "upcs":[
+
+        ],
+        "brandName":"Nike",
+        "minSalePrice":34.05,
+        "brandId":5572,
+        "categoryIdPath":"10179 > 17421 > 17471 > 17538",
+        "mpns":[
+
+        ],
+        "countryCode":"US",
+        "currency":"USD",
+        "title":"Nike Men's Donwshifter 6 Running Shoe Stealth/White/Black/Black",
+        "lastRecordedAt":1461252149553,
+        "imageUrl":"http://ecx.images-amazon.com/images/I/81MWOlWYEWL._UX535_.jpg",
+        "maxSalePrice":60.0,
+        "offersCount":10,
+        "storesCount":1
+      },
+      {
+        "categoryNamePath":"Clothing & Accessories > Men > Active > Active Shirts & Tees",
+        "categoryId":24135,
+        "mpid":"d60695a7093ad8b8221e6de635ef1f03",
+        "categoryName":"Active Shirts & Tees",
+        "upcs":[
+
+        ],
+        "brandName":"Nike",
+        "minSalePrice":19.0,
+        "brandId":5572,
+        "categoryIdPath":"10166 > 16204 > 16233 > 24135",
+        "mpns":[
+          "377780-063",
+          "377780-100"
+        ],
+        "countryCode":"US",
+        "currency":"USD",
+        "title":"Nike Men's Long Sleeve Legend Dri Fit Tee",
+        "lastRecordedAt":1461659424398,
+        "imageUrl":"http://ecx.images-amazon.com/images/I/61UHo2B28xL._UY550_.jpg",
+        "maxSalePrice":50.96,
+        "offersCount":44,
+        "storesCount":2
+      },
+      {
+        "categoryNamePath":"Clothing & Accessories > Women > Active > Active Pants",
+        "categoryId":24136,
+        "mpid":"f52f1209f462ca69013fee68787a4678",
+        "categoryName":"Active Pants",
+        "upcs":[
+          "091207637618;1558008700930",
+          "091207637878;1558008700960",
+          "00091207637601",
+          "091207637601;1558008700920",
+          "00091207637595",
+          "00091207637878",
+          "091207637595;1558008700910",
+          "00091207637618"
+        ],
+        "brandName":"Nike",
+        "minSalePrice":27.99,
+        "brandId":5572,
+        "categoryIdPath":"10166 > 16021 > 16202 > 24136",
+        "mpns":[
+          "25468021",
+          "725468",
+          "nike-pnt-725468"
+        ],
+        "countryCode":"US",
+        "currency":"USD",
+        "title":"Nike Womens Pro Cool Training Capris",
+        "lastRecordedAt":1462887300852,
+        "imageUrl":"http://ecx.images-amazon.com/images/I/71HQ4B7cUOL._UX679_.jpg",
+        "maxSalePrice":42.0,
+        "offersCount":105,
+        "storesCount":7
+      },
+      {
+        "categoryNamePath":"Sports & Outdoors > Accessories > Sports Water Bottles",
+        "categoryId":25063,
+        "mpid":"5873b85e6cad8e52726f90c4d093c3db",
+        "categoryName":"Sports Water Bottles",
+        "upcs":[
+
+        ],
+        "brandName":"Nike",
+        "minSalePrice":5.99,
+        "brandId":5572,
+        "categoryIdPath":"10162 > 16714 > 25063",
+        "mpns":[
+          "N.OB.31.030.OS"
+        ],
+        "countryCode":"US",
+        "currency":"USD",
+        "title":"Nike Sport Water Bottle with Hang Tag Clear/Black",
+        "lastRecordedAt":1462355669557,
+        "imageUrl":"http://ecx.images-amazon.com/images/I/81JSR2cSsWL._SY450_.jpg",
+        "maxSalePrice":12.99,
+        "offersCount":9,
+        "storesCount":3
+      }
+    ]
+  }
+}

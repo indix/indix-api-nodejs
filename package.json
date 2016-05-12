@@ -4,6 +4,7 @@
   "description": "Indix API Javascript Client",
   "main": "index.js",
   "scripts": {
+    "tdd": "mocha --compilers js:babel-register --watch",
     "test": "mocha --compilers js:babel-register --timeout 5000"
   },
   "author": "Indix",
