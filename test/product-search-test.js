@@ -16,7 +16,7 @@ describe('Product Search', function() {
 
   it('summary should return the approppriate products with summary information', function(done){
 
-    var stubData = JSON.parse(fs.readFileSync('test/stubs/product-summary.json', 'utf8'));
+    var stubData = JSON.parse(fs.readFileSync('test/stubs/product-search-summary.json', 'utf8'));
     nock('https://api.indix.com').get('/v2/summary/products?q=nike&countryCode=US&app_id=APP_ID&app_key=APP_KEY').reply(200, stubData);
 
     var query = {
@@ -61,7 +61,7 @@ describe('Product Search', function() {
 
   it('offers standard should return the approppriate products with offers standard information', function(done){
 
-    var stubData = JSON.parse(fs.readFileSync('test/stubs/product-offers-standard.json', 'utf8'));
+    var stubData = JSON.parse(fs.readFileSync('test/stubs/product-search-offers-standard.json', 'utf8'));
     nock('https://api.indix.com').get('/v2/offersStandard/products?q=nike&storeId=24&countryCode=US&app_id=APP_ID&app_key=APP_KEY').reply(200, stubData);
 
     var query = {
@@ -112,7 +112,7 @@ describe('Product Search', function() {
 
   it('offers premium should return the approppriate products with offers premium information', function(done){
 
-    var stubData = JSON.parse(fs.readFileSync('test/stubs/product-offers-premium.json', 'utf8'));
+    var stubData = JSON.parse(fs.readFileSync('test/stubs/product-search-offers-premium.json', 'utf8'));
     nock('https://api.indix.com').get('/v2/offersPremium/products?q=nike&storeId=24&countryCode=US&app_id=APP_ID&app_key=APP_KEY').reply(200, stubData);
 
     var query = {
@@ -163,7 +163,7 @@ describe('Product Search', function() {
 
   it('catalog standard should return the approppriate products with catalog standard information', function(done){
 
-    var stubData = JSON.parse(fs.readFileSync('test/stubs/product-catalog-standard.json', 'utf8'));
+    var stubData = JSON.parse(fs.readFileSync('test/stubs/product-search-catalog-standard.json', 'utf8'));
     nock('https://api.indix.com').get('/v2/catalogStandard/products?q=nike&storeId=24&countryCode=US&app_id=APP_ID&app_key=APP_KEY').reply(200, stubData);
 
     var query = {
@@ -214,7 +214,7 @@ describe('Product Search', function() {
 
   it('catalog premium should return the approppriate products with catalog premium information', function(done){
 
-    var stubData = JSON.parse(fs.readFileSync('test/stubs/product-catalog-premium.json', 'utf8'));
+    var stubData = JSON.parse(fs.readFileSync('test/stubs/product-search-catalog-premium.json', 'utf8'));
     nock('https://api.indix.com').get('/v2/catalogPremium/products?q=nike&storeId=24&countryCode=US&app_id=APP_ID&app_key=APP_KEY').reply(200, stubData);
 
     var query = {
@@ -260,7 +260,7 @@ describe('Product Search', function() {
 
   it('universal should return the approppriate products with universal information', function(done){
 
-    var stubData = JSON.parse(fs.readFileSync('test/stubs/product-universal.json', 'utf8'));
+    var stubData = JSON.parse(fs.readFileSync('test/stubs/product-search-universal.json', 'utf8'));
     nock('https://api.indix.com').get('/v2/universal/products?q=nike&storeId=24&countryCode=US&app_id=APP_ID&app_key=APP_KEY').reply(200, stubData);
 
     var query = {

@@ -2,6 +2,8 @@ import _ from 'lodash';
 
 export function convertJSONToQueryParams(o){
 
+  delete o['mpid'];
+
   let params = _.map(o, function(value, attr){
     
     if(attr == 'appID') attr = 'app_id';

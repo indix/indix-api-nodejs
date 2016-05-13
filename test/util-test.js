@@ -74,4 +74,18 @@ describe('URL converter', function() {
 
   });
 
+  it('should remove mpid from paramters', function(){
+
+    let url,
+        query;
+
+    query = {
+      q: 'nike',
+      mpid: '8e1d8cd338ada38624d2f9322b259402'
+    }
+    url = 'q=nike';
+    util.convertJSONToQueryParams(query).should.be.equal(url);
+
+  });
+
 });
