@@ -16,60 +16,36 @@ export function init(options){
   appKey = options.appKey;
 }
 
-export function getBrands(query, callback){
+function getEntities(type, query, callback){
 
   query = query || {};
   _.assign(query, { appID: appID, appKey: appKey });
 
-  var endpoint = '/v2/brands';
-  var params = util.convertJSONToQueryParams(query);
-  var url = HOST + endpoint + '?' + params;
+  let endpoint = '/v2/' + type.toLowerCase();
+
+  let params = util.convertJSONToQueryParams(query);
+  let url = HOST + endpoint + '?' + params;
   request(url, function (error, response, body) {
     if (!error && response.statusCode == 200) {
-      var r = JSON.parse(body);
+      let r = JSON.parse(body);
       if(r.message == 'ok'){
-        callback(r.result.brands);
+        callback(r.result[type.toLowerCase()]);
       }
     }
-  })
+  });
 
+}
+
+export function getBrands(query, callback){
+  getEntities('Brands', query, callback);
 }
 
 export function getStores(query, callback){
-
-  query = query || {};
-  _.assign(query, { appID: appID, appKey: appKey });
-
-  var endpoint = '/v2/stores';
-  var params = util.convertJSONToQueryParams(query);
-  var url = HOST + endpoint + '?' + params;
-  request(url, function (error, response, body) {
-    if (!error && response.statusCode == 200) {
-      var r = JSON.parse(body);
-      if(r.message == 'ok'){
-        callback(r.result.stores);
-      }
-    }
-  })
-
+  getEntities('Stores', query, callback);
 }
 
 export function getCategories(callback){
-
-  var query = { appID: appID, appKey: appKey };
-
-  var endpoint = '/v2/categories';
-  var params = util.convertJSONToQueryParams(query);
-  var url = HOST + endpoint + '?' + params;
-  request(url, function (error, response, body) {
-    if (!error && response.statusCode == 200) {
-      var r = JSON.parse(body);
-      if(r.message == 'ok'){
-        callback(r.result.categories);
-      }
-    }
-  })
-
+  getEntities('Categories', null, callback);
 }
 
 function getProductSearch(type, query, callback){
@@ -77,7 +53,7 @@ function getProductSearch(type, query, callback){
   query = query || {};
   _.assign(query, { appID: appID, appKey: appKey });
 
-  var endpoint;
+  let endpoint;
 
   switch(type){
     case 'Summary':
@@ -100,11 +76,11 @@ function getProductSearch(type, query, callback){
       break;
   }
 
-  var params = util.convertJSONToQueryParams(query);
-  var url = HOST + endpoint + '?' + params;
+  let params = util.convertJSONToQueryParams(query);
+  let url = HOST + endpoint + '?' + params;
   request(url, function (error, response, body) {
     if (!error && response.statusCode == 200) {
-      var r = JSON.parse(body);
+      let r = JSON.parse(body);
       if(r.message == 'ok'){
         callback(r.result.products);
       }
@@ -142,7 +118,7 @@ function getProductLookup(type, query, callback){
   query = query || {};
   _.assign(query, { appID: appID, appKey: appKey });
 
-  var endpoint;
+  let endpoint;
 
   switch(type){
     case 'Summary':
@@ -165,11 +141,11 @@ function getProductLookup(type, query, callback){
       break;
   }
 
-  var params = util.convertJSONToQueryParams(query);
-  var url = HOST + endpoint + '?' + params;
+  let params = util.convertJSONToQueryParams(query);
+  let url = HOST + endpoint + '?' + params;
   request(url, function (error, response, body) {
     if (!error && response.statusCode == 200) {
-      var r = JSON.parse(body);
+      let r = JSON.parse(body);
       if(r.message == 'ok'){
         callback(r.result.product);
       }
