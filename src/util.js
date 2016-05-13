@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-export function convertJSONToQueryParams(o){
+export function convertToQueryParams(o){
 
   delete o['mpid'];
 

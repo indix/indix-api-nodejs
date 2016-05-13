@@ -20,7 +20,7 @@ describe('URL converter', function() {
       app_key: 'APP_KEY'
     }
     url = 'q=nike&countryCode=US&app_id=APP_ID&app_key=APP_KEY';
-    util.convertJSONToQueryParams(query).should.be.equal(url);
+    util.convertToQueryParams(query).should.be.equal(url);
 
   });
 
@@ -34,7 +34,7 @@ describe('URL converter', function() {
       countryCode: 'US'
     }
     url = 'q=nike&countryCode=US';
-    util.convertJSONToQueryParams(query).should.be.equal(url);
+    util.convertToQueryParams(query).should.be.equal(url);
 
   });
 
@@ -70,7 +70,7 @@ describe('URL converter', function() {
       app_key: 'APP_KEY'
     }
     url = 'countryCode=US&q=nike&storeId=24&storeId=25&storeId=26&alsoSoldAt=270&alsoSoldAt=271&brandId=5572&brandId=5573&categoryId=99998&categoryId=99999&upc=SOME_UPC&mpn=SOME_MPN&sku=SOME_SKU&startPrice=1&endPrice=100&availability=IN_STOCK&priceHistoryAvailable=true&priceChange=EITHER&onPromotion=true&lastRecordedIn=15&storesCount=10&applyFiltersTo=storeIdOrAlsoSoldAt&sortBy=PRICE_LOW_TO_HIGH&facetBy=storeId&facetBy=brandId&pageNumber=10&pageSize=20&app_id=APP_ID&app_key=APP_KEY';
-    util.convertJSONToQueryParams(query).should.be.equal(url);
+    util.convertToQueryParams(query).should.be.equal(url);
 
   });
 
@@ -84,7 +84,7 @@ describe('URL converter', function() {
       mpid: '8e1d8cd338ada38624d2f9322b259402'
     }
     url = 'q=nike';
-    util.convertJSONToQueryParams(query).should.be.equal(url);
+    util.convertToQueryParams(query).should.be.equal(url);
 
   });
 
