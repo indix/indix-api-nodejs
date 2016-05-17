@@ -1,6 +1,9 @@
 import _ from 'lodash';
 import request from 'request';
 import * as util from './util.js';
+import fs from 'fs';
+import zlib from 'zlib';
+import byline from 'byline';
 
 let appID,
     appKey;
@@ -289,49 +292,35 @@ export function getJobStatus(jobId, callback){
 
 }
 
-export function downloadProducts(jobId){
+export function downloadProducts(jobID, callback){
 
-  let fileNameGzip = './server/files/' + jobID + '.jsonl.gz';
-  let fileNameUnzip = './server/files/' + jobID + '.jsonl';
-  let fileNameProcess = './server/files/' + jobID + '_status.txt';
-
-  fs.writeFile(fileNameProcess, "PROCESSING", function(err) {
-    if(err) {
-      return console.log(err);
-    }
-  });
+  let fileNameGzip = './files/' + jobID + '.jsonl.gz';
+  let fileNameUnzip = './files/' + jobID + '.jsonl';
 
   let url = 'https://api.indix.com/v2/bulk/jobs/' + jobID + '/download?app_id=' + appID + '&app_key=' + appKey;
-
-  console.log('Downloading: ' + url);
 
   let writeStream = fs.createWriteStream(fileNameGzip);
   request(url).pipe(writeStream);
 
   writeStream.on('finish', function(){
 
-    console.log(fileNameGzip + ' saved');
-
-    let contents = fs.readFileSync(fileNameGzip).toString();
-    if(contents.indexOf('File no longer available') != -1){
-      console.log(contents);
-      fs.writeFile(fileNameProcess, "ERROR", function(err) {
-        if(err) {
-          return console.log(err);
-        }
-      });
-      return;
-    }
-
     fs.createReadStream(fileNameGzip)
-      .pipe(zlib.createUnzip())
+      // .pipe(zlib.createUnzip())
       .pipe(
         fs.createWriteStream(fileNameUnzip)
           .on('finish', function(){
-            console.log(fileNameUnzip + ' saved');
-            ConverterHelper.convertAPIResponseToRows(fileNameUnzip, homeID, function(csvFileName){
-              complete(csvFileName);
-            });
+
+            var products = [];
+
+            var stream = byline(fs.createReadStream(fileNameUnzip, { encoding: 'utf8' }));
+            stream
+              .on('data', function(line) {
+                products.push(JSON.parse(line));
+              })
+              .on('end', function() {
+                callback(products);
+              });
+
           })
       );
 

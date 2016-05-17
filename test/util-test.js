@@ -8,7 +8,7 @@ import * as util from '../src/util.js';
 
 describe('URL converter', function() {
 
-  it('should convert appID and appKey to app_id and app_key paramters', function(){
+  it('should convert appID and appKey to app_id and app_key parameters', function(){
 
     let url,
         query;
@@ -24,7 +24,7 @@ describe('URL converter', function() {
 
   });
 
-  it('should convert simple paramters', function(){
+  it('should convert simple parameters', function(){
 
     let url,
         query;
@@ -38,7 +38,7 @@ describe('URL converter', function() {
 
   });
 
-  it('should convert complex paramters', function(){
+  it('should convert complex parameters', function(){
 
     let url,
         query;
@@ -74,7 +74,7 @@ describe('URL converter', function() {
 
   });
 
-  it('should remove mpid from paramters', function(){
+  it('should remove mpid from parameters', function(){
 
     let url,
         query;
