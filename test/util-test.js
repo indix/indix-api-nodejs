@@ -88,4 +88,18 @@ describe('URL converter', function() {
 
   });
 
+  it('should remove input file from parameters', function(){
+
+    let url,
+        query;
+
+    query = {
+      q: 'nike',
+      inputFile: 'EXAMPLE_CONTENT'
+    }
+    url = 'q=nike';
+    util.convertToQueryParams(query).should.be.equal(url);
+
+  });
+
 });

@@ -310,9 +310,9 @@ export function downloadProducts(jobID, callback){
         fs.createWriteStream(fileNameUnzip)
           .on('finish', function(){
 
-            var products = [];
+            let products = [];
 
-            var stream = byline(fs.createReadStream(fileNameUnzip, { encoding: 'utf8' }));
+            let stream = byline(fs.createReadStream(fileNameUnzip, { encoding: 'utf8' }));
             stream
               .on('data', function(line) {
                 products.push(JSON.parse(line));
@@ -326,4 +326,94 @@ export function downloadProducts(jobID, callback){
 
   });
 
+}
+
+function getBulkProductLookup(type, query, callback){
+
+  query = query || {};
+  _.assign(query, { appID: appID, appKey: appKey });
+
+  let endpoint;
+
+  switch(type){
+
+    // Bulk Search Endpoints
+    case 'Bulk Search Summary':
+      endpoint = '/v2/summary/bulk/products';
+      break;
+    case 'Bulk Search Offers Standard':
+      endpoint = '/v2/offersStandard/bulk/products';
+      break;
+    case 'Bulk Search Offers Premium':
+      endpoint = '/v2/offersPremium/bulk/products';
+      break;
+    case 'Bulk Search Catalog Standard':
+      endpoint = '/v2/catalogStandard/bulk/products';
+      break;
+    case 'Bulk Search Catalog Premium':
+      endpoint = '/v2/catalogPremium/bulk/products';
+      break;
+    case 'Bulk Search Universal':
+      endpoint = '/v2/universal/bulk/products';
+      break;
+
+    // Bulk Lookup Endpoints
+    case 'Bulk Lookup Summary':
+      endpoint = '/v2/summary/bulk/lookup';
+      break;
+    case 'Bulk Lookup Offers Standard':
+      endpoint = '/v2/offersStandard/bulk/lookup';
+      break;
+    case 'Bulk Lookup Offers Premium':
+      endpoint = '/v2/offersPremium/bulk/lookup';
+      break;
+    case 'Bulk Lookup Catalog Standard':
+      endpoint = '/v2/catalogStandard/bulk/lookup';
+      break;
+    case 'Bulk Lookup Catalog Premium':
+      endpoint = '/v2/catalogPremium/bulk/lookup';
+      break;
+    case 'Bulk Lookup Universal':
+      endpoint = '/v2/universal/bulk/lookup';
+      break;
+  }
+
+  let inputFile = query.inputFile;
+  let params = util.convertToQueryParams(query);
+  let url = HOST + endpoint;
+
+  console.log(params);
+
+  let options = { method: 'POST',
+    url: url,
+    headers: {
+      'cache-control': 'no-cache',
+      'content-type': 'multipart/form-data; boundary=---011000010111000001101001'
+    },
+    formData: {
+      file: {
+        value: inputFile,
+        options: { contentType: null }
+      },
+      app_id: appID,
+      app_key: appKey,
+      countryCode: params.countryCode
+    }
+  };
+
+  console.log(options);
+
+  request(options, function(error, response, body){
+    if (!error && response.statusCode == 200) {
+      res.send(body);
+    }else if (!error && response.statusCode == 429) {
+      res.status(response.statusCode).send(body);
+    }
+  });
+
+}
+
+export function getBulkLookupSummary(query, callback){
+  console.log(query);
+  getBulkProductLookup('Bulk Lookup Summary', query, callback);
 }

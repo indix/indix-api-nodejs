@@ -3,6 +3,7 @@ import _ from 'lodash';
 export function convertToQueryParams(o){
 
   delete o['mpid'];
+  delete o['inputFile'];
 
   let params = _.map(o, function(value, attr){
     
