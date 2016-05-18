@@ -1,0 +1,22 @@
+{
+  "message":"ok",
+  "result":{
+    "suggestions":[
+      {
+        "suggestion":"red"
+      },
+      {
+        "suggestion":"red and"
+      },
+      {
+        "suggestion":"red white"
+      },
+      {
+        "suggestion":"red black"
+      },
+      {
+        "suggestion":"red blue"
+      }
+    ]
+  }
+}

@@ -57,6 +57,33 @@ export function getCategories(){
   return getEntities('Categories');
 }
 
+export function getSearchSuggestions(query){
+
+  query = query || {};
+  _.assign(query, { appID: appID, appKey: appKey });
+
+  let endpoint = '/v2/products/suggestions';
+
+  let params = util.convertToQueryParams(query);
+  let url = HOST + endpoint + '?' + params;
+
+  return new Promise(function (fulfill, reject){
+    request(url, function (error, response, body) {
+      if (!error && response.statusCode == 200) {
+        let r = JSON.parse(body);
+        if(r.message == 'ok'){
+          let s = _.map(r.result.suggestions, function(s){
+            return s.suggestion;
+          });
+          fulfill(s);
+        } else {
+          reject(r);
+        }
+      }
+    });
+  });
+}
+
 function getProducts(type, query){
 
   query = query || {};
@@ -113,17 +140,17 @@ function getProducts(type, query){
   return new Promise(function (fulfill, reject){
 
     request(url, function (error, response, body) {
-    if (!error && response.statusCode == 200) {
-      let r = JSON.parse(body);
-      if(r.message == 'ok'){
-        let returnValue = type.indexOf('Product Search') != -1 ? r.result.products : r.result.product;
-        fulfill(returnValue);
-      }else{
-        reject(r);
+      if (!error && response.statusCode == 200) {
+        let r = JSON.parse(body);
+        if(r.message == 'ok'){
+          let returnValue = type.indexOf('Product Search') != -1 ? r.result.products : r.result.product;
+          fulfill(returnValue);
+        }else{
+          reject(r);
+        }
       }
-    }
 
-  });
+    });
 
   });
 

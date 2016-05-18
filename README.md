@@ -40,6 +40,14 @@ ixClient.getCategories().then(function(results){
 });
 ```
 
+## Search suggestions
+```js
+var query = { q: 'red', countryCode: 'US' }
+ixClient.getSearchSuggestions(query).then(function(results){
+  console.log(results[0]); // would be 'red'
+});
+```
+
 ## Search for products
 ```js
 var query = { q: 'nike', countryCode: 'US' }
