@@ -5,7 +5,10 @@ This is an API client library for the Indix API written in NodeJS. For detailed 
 Node v5.0.0 or later
 
 ## Installation
-TBD
+Run the following command in your NodeJS project directory to download and install the API client.
+```
+npm install indix-api-nodejs --save
+```
 
 ## Usage
 The client needs to be first instantiated with the appropriate application id and key to be able to use the different api endpoints.
