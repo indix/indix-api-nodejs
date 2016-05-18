@@ -1,4 +1,5 @@
 # Indix API NodeJS Client
+This is an API client library for the Indix API written in NodeJS. For detailed documentation, please visit the [Indix Developer Portal](https://developer.indix.com/).
 
 ## Requirements
 Node v5.0.0 or later
