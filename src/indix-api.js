@@ -172,57 +172,86 @@ function getBulkProducts(type, query, callback){
 
   switch(type){
 
-    // Bulk Search Endpoints
-    case 'Bulk Search Summary':
+    // Bulk Product Search Endpoints
+    case 'Bulk Product Search Summary':
       endpoint = '/v2/summary/bulk/products';
       break;
-    case 'Bulk Search Offers Standard':
+    case 'Bulk Product Search Offers Standard':
       endpoint = '/v2/offersStandard/bulk/products';
       break;
-    case 'Bulk Search Offers Premium':
+    case 'Bulk Product Search Offers Premium':
       endpoint = '/v2/offersPremium/bulk/products';
       break;
-    case 'Bulk Search Catalog Standard':
+    case 'Bulk Product Search Catalog Standard':
       endpoint = '/v2/catalogStandard/bulk/products';
       break;
-    case 'Bulk Search Catalog Premium':
+    case 'Bulk Product Search Catalog Premium':
       endpoint = '/v2/catalogPremium/bulk/products';
       break;
-    case 'Bulk Search Universal':
+    case 'Bulk Product Search Universal':
       endpoint = '/v2/universal/bulk/products';
       break;
 
-    // Bulk Lookup Endpoints
-    case 'Bulk Lookup Summary':
-      endpoint = '/v2/summary/bulk/' + query.mpid;
+    // Bulk Product Lookup Endpoints
+    case 'Bulk Product Lookup Summary':
+      endpoint = '/v2/summary/bulk/lookup';
       break;
-    case 'Bulk Lookup Offers Standard':
-      endpoint = '/v2/offersStandard/bulk/' + query.mpid;
+    case 'Bulk Product Lookup Offers Standard':
+      endpoint = '/v2/offersStandard/bulk/lookup';
       break;
-    case 'Bulk Lookup Offers Premium':
-      endpoint = '/v2/offersPremium/bulk/' + query.mpid;
+    case 'Bulk Product Lookup Offers Premium':
+      endpoint = '/v2/offersPremium/bulk/lookup';
       break;
-    case 'Bulk Lookup Catalog Standard':
-      endpoint = '/v2/catalogStandard/bulk/' + query.mpid;
+    case 'Bulk Product Lookup Catalog Standard':
+      endpoint = '/v2/catalogStandard/bulk/lookup';
       break;
-    case 'Bulk Lookup Catalog Premium':
-      endpoint = '/v2/catalogPremium/bulk/' + query.mpid;
+    case 'Bulk Product Lookup Catalog Premium':
+      endpoint = '/v2/catalogPremium/bulk/lookup';
       break;
-    case 'Bulk Lookup Universal':
-      endpoint = '/v2/universal/bulk/' + query.mpid;
+    case 'Bulk Product Lookup Universal':
+      endpoint = '/v2/universal/bulk/lookup';
       break;
   }
 
+  let options = {};
+
+  let inputFile = query.inputFile;
   let params = util.convertToQueryParams(query);
   let url = HOST + endpoint;
-  let options = {
-    method: 'POST',
-    url: url,
-    headers: {
-      'content-type': 'application/x-www-form-urlencoded'
-    },
-    form: params
+
+  if(type.indexOf('Product Search') != -1){
+
+    options = {
+      method: 'POST',
+      url: url,
+      headers: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      form: params
+    }
+
+  } else {
+
+    options = {
+      method: 'POST',
+      url: url,
+      headers: {
+        'cache-control': 'no-cache',
+        'content-type': 'multipart/form-data; boundary=---011000010111000001101001'
+      },
+      formData: {
+        file: {
+          value: inputFile,
+          options: { contentType: null }
+        },
+        app_id: appID,
+        app_key: appKey,
+        countryCode: query.countryCode
+      }
+    }
+
   }
+
   request.post(options, function (error, response, body) {
     if (!error && response.statusCode == 200) {
       callback(JSON.parse(body));
@@ -232,51 +261,51 @@ function getBulkProducts(type, query, callback){
 }
 
 export function getBulkProductSummary(query, callback){
-  getBulkProducts('Bulk Search Summary', query, callback);
+  getBulkProducts('Bulk Product Search Summary', query, callback);
 }
 
 export function getBulkProductOffersStandard(query, callback){
-  getBulkProducts('Bulk Search Offers Standard', query, callback);
+  getBulkProducts('Bulk Product Search Offers Standard', query, callback);
 }
 
 export function getBulkProductOffersPremium(query, callback){
-  getBulkProducts('Bulk Search Offers Premium', query, callback);
+  getBulkProducts('Bulk Product Search Offers Premium', query, callback);
 }
 
 export function getBulkProductCatalogStandard(query, callback){
-  getBulkProducts('Bulk Search Catalog Standard', query, callback);
+  getBulkProducts('Bulk Product Search Catalog Standard', query, callback);
 }
 
 export function getBulkProductCatalogPremium(query, callback){
-  getBulkProducts('Bulk Search Catalog Premium', query, callback);
+  getBulkProducts('Bulk Product Search Catalog Premium', query, callback);
 }
 
 export function getBulkProductUniversal(query, callback){
-  getBulkProducts('Bulk Search Universal', query, callback);
+  getBulkProducts('Bulk Product Search Universal', query, callback);
 }
 
 export function getBulkProductLookupSummary(query, callback){
-  getBulkProducts('Bulk Lookup Summary', query, callback);
+  getBulkProducts('Bulk Product Lookup Summary', query, callback);
 }
 
 export function getBulkProductLookupOffersStandard(query, callback){
-  getBulkProducts('Bulk Lookup Offers Standard', query, callback);
+  getBulkProducts('Bulk Product Lookup Offers Standard', query, callback);
 }
 
 export function getBulkProductLookupOffersPremium(query, callback){
-  getBulkProducts('Bulk Lookup Offers Premium', query, callback);
+  getBulkProducts('Bulk Product Lookup Offers Premium', query, callback);
 }
 
 export function getBulkProductLookupCatalogStandard(query, callback){
-  getBulkProducts('Bulk Lookup Catalog Standard', query, callback);
+  getBulkProducts('Bulk Product Lookup Catalog Standard', query, callback);
 }
 
 export function getBulkProductLookupCatalogPremium(query, callback){
-  getBulkProducts('Bulk Lookup Catalog Premium', query, callback);
+  getBulkProducts('Bulk Product Lookup Catalog Premium', query, callback);
 }
 
 export function getBulkProductLookupUniversal(query, callback){
-  getBulkProducts('Bulk Lookup Universal', query, callback);
+  getBulkProducts('Bulk Product Lookup Universal', query, callback);
 }
 
 export function getJobStatus(jobId, callback){
@@ -326,94 +355,4 @@ export function downloadProducts(jobID, callback){
 
   });
 
-}
-
-function getBulkProductLookup(type, query, callback){
-
-  query = query || {};
-  _.assign(query, { appID: appID, appKey: appKey });
-
-  let endpoint;
-
-  switch(type){
-
-    // Bulk Search Endpoints
-    case 'Bulk Search Summary':
-      endpoint = '/v2/summary/bulk/products';
-      break;
-    case 'Bulk Search Offers Standard':
-      endpoint = '/v2/offersStandard/bulk/products';
-      break;
-    case 'Bulk Search Offers Premium':
-      endpoint = '/v2/offersPremium/bulk/products';
-      break;
-    case 'Bulk Search Catalog Standard':
-      endpoint = '/v2/catalogStandard/bulk/products';
-      break;
-    case 'Bulk Search Catalog Premium':
-      endpoint = '/v2/catalogPremium/bulk/products';
-      break;
-    case 'Bulk Search Universal':
-      endpoint = '/v2/universal/bulk/products';
-      break;
-
-    // Bulk Lookup Endpoints
-    case 'Bulk Lookup Summary':
-      endpoint = '/v2/summary/bulk/lookup';
-      break;
-    case 'Bulk Lookup Offers Standard':
-      endpoint = '/v2/offersStandard/bulk/lookup';
-      break;
-    case 'Bulk Lookup Offers Premium':
-      endpoint = '/v2/offersPremium/bulk/lookup';
-      break;
-    case 'Bulk Lookup Catalog Standard':
-      endpoint = '/v2/catalogStandard/bulk/lookup';
-      break;
-    case 'Bulk Lookup Catalog Premium':
-      endpoint = '/v2/catalogPremium/bulk/lookup';
-      break;
-    case 'Bulk Lookup Universal':
-      endpoint = '/v2/universal/bulk/lookup';
-      break;
-  }
-
-  let inputFile = query.inputFile;
-  let params = util.convertToQueryParams(query);
-  let url = HOST + endpoint;
-
-  console.log(params);
-
-  let options = { method: 'POST',
-    url: url,
-    headers: {
-      'cache-control': 'no-cache',
-      'content-type': 'multipart/form-data; boundary=---011000010111000001101001'
-    },
-    formData: {
-      file: {
-        value: inputFile,
-        options: { contentType: null }
-      },
-      app_id: appID,
-      app_key: appKey,
-      countryCode: params.countryCode
-    }
-  };
-
-  console.log(options);
-
-  request(options, function(error, response, body){
-    if (!error && response.statusCode == 200) {
-      res.send(body);
-    }else if (!error && response.statusCode == 429) {
-      res.status(response.statusCode).send(body);
-    }
-  });
-
-}
-
-export function getBulkLookupSummary(query, callback){
-  console.log(query);
-  getBulkProductLookup('Bulk Lookup Summary', query, callback);
 }
