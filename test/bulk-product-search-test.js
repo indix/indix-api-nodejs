@@ -24,7 +24,7 @@ describe('Bulk Product Search', function() {
       countryCode: 'US'
     }
 
-    ixClient.getBulkProductSummary(query, function(result){
+    ixClient.getBulkProductSummary(query).then(function(result){
       result.should.be.like({ id: 1234, status: 'SUBMITTED' });
       done();
     });
@@ -41,7 +41,7 @@ describe('Bulk Product Search', function() {
       countryCode: 'US'
     }
 
-    ixClient.getBulkProductOffersStandard(query, function(result){
+    ixClient.getBulkProductOffersStandard(query).then(function(result){
       result.should.be.like({ id: 1234, status: 'SUBMITTED' });
       done();
     });
@@ -58,7 +58,7 @@ describe('Bulk Product Search', function() {
       countryCode: 'US'
     }
 
-    ixClient.getBulkProductOffersPremium(query, function(result){
+    ixClient.getBulkProductOffersPremium(query).then(function(result){
       result.should.be.like({ id: 1234, status: 'SUBMITTED' });
       done();
     });
@@ -75,7 +75,7 @@ describe('Bulk Product Search', function() {
       countryCode: 'US'
     }
 
-    ixClient.getBulkProductCatalogStandard(query, function(result){
+    ixClient.getBulkProductCatalogStandard(query).then(function(result){
       result.should.be.like({ id: 1234, status: 'SUBMITTED' });
       done();
     });
@@ -92,7 +92,7 @@ describe('Bulk Product Search', function() {
       countryCode: 'US'
     }
 
-    ixClient.getBulkProductCatalogPremium(query, function(result){
+    ixClient.getBulkProductCatalogPremium(query).then(function(result){
       result.should.be.like({ id: 1234, status: 'SUBMITTED' });
       done();
     });
@@ -109,7 +109,7 @@ describe('Bulk Product Search', function() {
       countryCode: 'US'
     }
 
-    ixClient.getBulkProductUniversal(query, function(result){
+    ixClient.getBulkProductUniversal(query).then(function(result){
       result.should.be.like({ id: 1234, status: 'SUBMITTED' });
       done();
     });

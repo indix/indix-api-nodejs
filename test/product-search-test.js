@@ -24,7 +24,7 @@ describe('Product Search', function() {
       countryCode: 'US'
     }
 
-    ixClient.getProductSummary(query, function(results){
+    ixClient.getProductSummary(query).then(function(results){
       results.length.should.equal(10);
       results[0].should.be.like({
         "categoryNamePath":"Shoes > Men > Fashion Sneakers",
@@ -70,7 +70,7 @@ describe('Product Search', function() {
       countryCode: 'US'
     }
 
-    ixClient.getProductOffersStandard(query, function(results){
+    ixClient.getProductOffersStandard(query).then(function(results){
       results.length.should.equal(10);
       results[0].stores['24'].offers[0].should.be.like({
         "sku":"B00T85RCQ8",
@@ -121,7 +121,7 @@ describe('Product Search', function() {
       countryCode: 'US'
     }
 
-    ixClient.getProductOffersPremium(query, function(results){
+    ixClient.getProductOffersPremium(query).then(function(results){
       results.length.should.equal(10);
       results[0].stores['24'].offers[0].should.be.like({
         "sku":"B00T85RCQ8",
@@ -172,7 +172,7 @@ describe('Product Search', function() {
       countryCode: 'US'
     }
 
-    ixClient.getProductCatalogStandard(query, function(results){
+    ixClient.getProductCatalogStandard(query).then(function(results){
       results.length.should.equal(10);
       results[0].should.be.like({
         "categoryNamePath":"Additional",
@@ -223,7 +223,7 @@ describe('Product Search', function() {
       countryCode: 'US'
     }
 
-    ixClient.getProductCatalogPremium(query, function(results){
+    ixClient.getProductCatalogPremium(query).then(function(results){
       results.length.should.equal(10);
       results[0].stores['24'].offers[0].should.be.like({
         "breadCrumbs":"",
@@ -269,7 +269,7 @@ describe('Product Search', function() {
       countryCode: 'US'
     }
 
-    ixClient.getProductUniversal(query, function(results){
+    ixClient.getProductUniversal(query).then(function(results){
       results.length.should.equal(10);
       results[0].stores['24'].offers[0].should.be.like({
         "breadCrumbs":"",

@@ -21,7 +21,7 @@ describe('Bulk Job Process', function() {
 
     var jobID = 1234;
 
-    ixClient.getJobStatus(jobID, function(result){
+    ixClient.getJobStatus(jobID).then(function(result){
       result.should.be.like({ id: 1234, status: 'COMPLETED', count: 10000 });
       done();
     });
@@ -35,7 +35,7 @@ describe('Bulk Job Process', function() {
 
     var jobID = 1234;
 
-    ixClient.downloadProducts(jobID, function(results){
+    ixClient.downloadProducts(jobID).then(function(results){
       results[0].should.be.like({
         "minSalePrice":13.0,
         "maxSalePrice":1799.0,

@@ -20,7 +20,7 @@ describe('BCS Search', function() {
     nock('https://api.indix.com').get('/v2/brands?q=Nike&app_id=APP_ID&app_key=APP_KEY').reply(200, stubData);
 
     var query = { q: 'Nike' }
-    ixClient.getBrands(query, function(results){
+    ixClient.getBrands(query).then(function(results){
       results.length.should.equal(1);
       results[0].should.be.like({ id: 5572, name: 'Nike' })
       done();
@@ -34,7 +34,7 @@ describe('BCS Search', function() {
     nock('https://api.indix.com').get('/v2/stores?q=Amazon.com&app_id=APP_ID&app_key=APP_KEY').reply(200, stubData);
 
     var query = { q: 'Amazon.com' }
-    ixClient.getStores(query, function(results){
+    ixClient.getStores(query).then(function(results){
       results.length.should.equal(4);
       results[0].should.be.like({ id: 270, name: 'Amazon.com Marketplace', countryCode: 'US' })
       done();
@@ -47,7 +47,7 @@ describe('BCS Search', function() {
     var stubData = JSON.parse(fs.readFileSync('test/stubs/categories.json', 'utf8'));
     nock('https://api.indix.com').get('/v2/categories?app_id=APP_ID&app_key=APP_KEY').reply(200, stubData);
 
-    ixClient.getCategories(function(results){
+    ixClient.getCategories().then(function(results){
       results.length.should.equal(3);
       results[0].should.be.like({ id: 10161, idPath: "10161", name: 'Computers & Accessories', namePath: 'Computers & Accessories' })
       done();

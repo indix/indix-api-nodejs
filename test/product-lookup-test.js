@@ -24,7 +24,7 @@ describe('Product Lookup', function() {
       countryCode: 'US'
     }
 
-    ixClient.getProductLookupSummary(query, function(result){
+    ixClient.getProductLookupSummary(query).then(function(result){
       result.should.be.like({
         "categoryNamePath":"Shoes > Men > Fashion Sneakers",
         "categoryId":20082,
@@ -69,7 +69,7 @@ describe('Product Lookup', function() {
       countryCode: 'US'
     }
 
-    ixClient.getProductLookupOffersStandard(query, function(result){
+    ixClient.getProductLookupOffersStandard(query).then(function(result){
       result.should.be.like({
         "categoryNamePath":"Shoes > Men > Fashion Sneakers",
         "categoryId":20082,
@@ -113,7 +113,7 @@ describe('Product Lookup', function() {
       countryCode: 'US'
     }
 
-    ixClient.getProductLookupOffersPremium(query, function(result){
+    ixClient.getProductLookupOffersPremium(query).then(function(result){
       result.stores['270'].offers[0].should.be.like({
         "sku":"B005ODHBE6",
         "refurbishedOffers":0,
@@ -162,7 +162,7 @@ describe('Product Lookup', function() {
       countryCode: 'US'
     }
 
-    ixClient.getProductLookupCatalogStandard(query, function(result){
+    ixClient.getProductLookupCatalogStandard(query).then(function(result){
       result.attributes.should.be.like({
         "size":[
           "10 d m us",
@@ -215,7 +215,7 @@ describe('Product Lookup', function() {
       countryCode: 'US'
     }
 
-    ixClient.getProductLookupCatalogPremium(query, function(result){
+    ixClient.getProductLookupCatalogPremium(query).then(function(result){
       result.stores['270'].offers[0].should.be.like({
         "breadCrumbs":"Shoes > Men's > Fashion Sneakers",
         "sku":"B005ODHBE6",
@@ -259,7 +259,7 @@ describe('Product Lookup', function() {
       countryCode: 'US'
     }
 
-    ixClient.getProductLookupUniversal(query, function(result){
+    ixClient.getProductLookupUniversal(query).then(function(result){
       result.attributes.should.be.like({
         "size":[
           "10 d m us",

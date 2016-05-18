@@ -4,6 +4,7 @@ import * as util from './util.js';
 import fs from 'fs';
 import zlib from 'zlib';
 import byline from 'byline';
+import Promise from 'promise';
 
 let appID,
     appKey;
@@ -19,7 +20,7 @@ export function init(options){
   appKey = options.appKey;
 }
 
-function getEntities(type, query, callback){
+function getEntities(type, query){
 
   query = query || {};
   _.assign(query, { appID: appID, appKey: appKey });
@@ -28,30 +29,35 @@ function getEntities(type, query, callback){
 
   let params = util.convertToQueryParams(query);
   let url = HOST + endpoint + '?' + params;
-  request(url, function (error, response, body) {
-    if (!error && response.statusCode == 200) {
-      let r = JSON.parse(body);
-      if(r.message == 'ok'){
-        callback(r.result[type.toLowerCase()]);
+
+  return new Promise(function (fulfill, reject){
+    request(url, function (error, response, body) {
+      if (!error && response.statusCode == 200) {
+        let r = JSON.parse(body);
+        if(r.message == 'ok'){
+          fulfill(r.result[type.toLowerCase()]);
+        } else {
+          reject(r);
+        }
       }
-    }
+    });
   });
 
 }
 
-export function getBrands(query, callback){
-  getEntities('Brands', query, callback);
+export function getBrands(query){
+  return getEntities('Brands', query);
 }
 
-export function getStores(query, callback){
-  getEntities('Stores', query, callback);
+export function getStores(query){
+  return getEntities('Stores', query);
 }
 
-export function getCategories(callback){
-  getEntities('Categories', null, callback);
+export function getCategories(){
+  return getEntities('Categories');
 }
 
-function getProducts(type, query, callback){
+function getProducts(type, query){
 
   query = query || {};
   _.assign(query, { appID: appID, appKey: appKey });
@@ -103,67 +109,75 @@ function getProducts(type, query, callback){
 
   let params = util.convertToQueryParams(query);
   let url = HOST + endpoint + '?' + params;
-  request(url, function (error, response, body) {
+
+  return new Promise(function (fulfill, reject){
+
+    request(url, function (error, response, body) {
     if (!error && response.statusCode == 200) {
       let r = JSON.parse(body);
       if(r.message == 'ok'){
         let returnValue = type.indexOf('Product Search') != -1 ? r.result.products : r.result.product;
-        callback(returnValue);
+        fulfill(returnValue);
+      }else{
+        reject(r);
       }
     }
+
+  });
+
   });
 
 }
 
-export function getProductSummary(query, callback){
-  getProducts('Product Search Summary', query, callback);
+export function getProductSummary(query){
+  return getProducts('Product Search Summary', query);
 }
 
-export function getProductOffersStandard(query, callback){
-  getProducts('Product Search Offers Standard', query, callback);
+export function getProductOffersStandard(query){
+  return getProducts('Product Search Offers Standard', query);
 }
 
-export function getProductOffersPremium(query, callback){
-  getProducts('Product Search Offers Premium', query, callback);
+export function getProductOffersPremium(query){
+  return getProducts('Product Search Offers Premium', query);
 }
 
-export function getProductCatalogStandard(query, callback){
-  getProducts('Product Search Catalog Standard', query, callback);
+export function getProductCatalogStandard(query){
+  return getProducts('Product Search Catalog Standard', query);
 }
 
-export function getProductCatalogPremium(query, callback){
-  getProducts('Product Search Catalog Premium', query, callback);
+export function getProductCatalogPremium(query){
+  return getProducts('Product Search Catalog Premium', query);
 }
 
-export function getProductUniversal(query, callback){
-  getProducts('Product Search Universal', query, callback);
+export function getProductUniversal(query){
+  return getProducts('Product Search Universal', query);
 }
 
-export function getProductLookupSummary(query, callback){
-  getProducts('Product Lookup Summary', query, callback);
+export function getProductLookupSummary(query){
+  return getProducts('Product Lookup Summary', query);
 }
 
-export function getProductLookupOffersStandard(query, callback){
-  getProducts('Product Lookup Offers Standard', query, callback);
+export function getProductLookupOffersStandard(query){
+  return getProducts('Product Lookup Offers Standard', query);
 }
 
-export function getProductLookupOffersPremium(query, callback){
-  getProducts('Product Lookup Offers Premium', query, callback);
+export function getProductLookupOffersPremium(query){
+  return getProducts('Product Lookup Offers Premium', query);
 }
 
-export function getProductLookupCatalogStandard(query, callback){
-  getProducts('Product Lookup Catalog Standard', query, callback);
+export function getProductLookupCatalogStandard(query){
+  return getProducts('Product Lookup Catalog Standard', query);
 }
 
-export function getProductLookupCatalogPremium(query, callback){
-  getProducts('Product Lookup Catalog Premium', query, callback);
+export function getProductLookupCatalogPremium(query){
+  return getProducts('Product Lookup Catalog Premium', query);
 }
 
-export function getProductLookupUniversal(query, callback){
-  getProducts('Product Lookup Universal', query, callback);
+export function getProductLookupUniversal(query){
+  return getProducts('Product Lookup Universal', query);
 }
 
-function getBulkProducts(type, query, callback){
+function getBulkProducts(type, query){
 
   query = query || {};
   _.assign(query, { appID: appID, appKey: appKey });
@@ -252,76 +266,84 @@ function getBulkProducts(type, query, callback){
 
   }
 
-  request.post(options, function (error, response, body) {
-    if (!error && response.statusCode == 200) {
-      callback(JSON.parse(body));
-    }
+  return new Promise(function (fulfill, reject){
+
+    request.post(options, function (error, response, body) {
+      if (!error && response.statusCode == 200) {
+        fulfill(JSON.parse(body));
+      }else{
+        reject(JSON.parse(body));
+      }
+    });
+
   });
 
 }
 
-export function getBulkProductSummary(query, callback){
-  getBulkProducts('Bulk Product Search Summary', query, callback);
+export function getBulkProductSummary(query){
+  return getBulkProducts('Bulk Product Search Summary', query);
 }
 
-export function getBulkProductOffersStandard(query, callback){
-  getBulkProducts('Bulk Product Search Offers Standard', query, callback);
+export function getBulkProductOffersStandard(query){
+  return getBulkProducts('Bulk Product Search Offers Standard', query);
 }
 
-export function getBulkProductOffersPremium(query, callback){
-  getBulkProducts('Bulk Product Search Offers Premium', query, callback);
+export function getBulkProductOffersPremium(query){
+  return getBulkProducts('Bulk Product Search Offers Premium', query);
 }
 
-export function getBulkProductCatalogStandard(query, callback){
-  getBulkProducts('Bulk Product Search Catalog Standard', query, callback);
+export function getBulkProductCatalogStandard(query){
+  return getBulkProducts('Bulk Product Search Catalog Standard', query);
 }
 
-export function getBulkProductCatalogPremium(query, callback){
-  getBulkProducts('Bulk Product Search Catalog Premium', query, callback);
+export function getBulkProductCatalogPremium(query){
+  return getBulkProducts('Bulk Product Search Catalog Premium', query);
 }
 
-export function getBulkProductUniversal(query, callback){
-  getBulkProducts('Bulk Product Search Universal', query, callback);
+export function getBulkProductUniversal(query){
+  return getBulkProducts('Bulk Product Search Universal', query);
 }
 
-export function getBulkProductLookupSummary(query, callback){
-  getBulkProducts('Bulk Product Lookup Summary', query, callback);
+export function getBulkProductLookupSummary(query){
+  return getBulkProducts('Bulk Product Lookup Summary', query);
 }
 
-export function getBulkProductLookupOffersStandard(query, callback){
-  getBulkProducts('Bulk Product Lookup Offers Standard', query, callback);
+export function getBulkProductLookupOffersStandard(query){
+  return getBulkProducts('Bulk Product Lookup Offers Standard', query);
 }
 
-export function getBulkProductLookupOffersPremium(query, callback){
-  getBulkProducts('Bulk Product Lookup Offers Premium', query, callback);
+export function getBulkProductLookupOffersPremium(query){
+  return getBulkProducts('Bulk Product Lookup Offers Premium', query);
 }
 
-export function getBulkProductLookupCatalogStandard(query, callback){
-  getBulkProducts('Bulk Product Lookup Catalog Standard', query, callback);
+export function getBulkProductLookupCatalogStandard(query){
+  return getBulkProducts('Bulk Product Lookup Catalog Standard', query);
 }
 
-export function getBulkProductLookupCatalogPremium(query, callback){
-  getBulkProducts('Bulk Product Lookup Catalog Premium', query, callback);
+export function getBulkProductLookupCatalogPremium(query){
+  return getBulkProducts('Bulk Product Lookup Catalog Premium', query);
 }
 
-export function getBulkProductLookupUniversal(query, callback){
-  getBulkProducts('Bulk Product Lookup Universal', query, callback);
+export function getBulkProductLookupUniversal(query){
+  return getBulkProducts('Bulk Product Lookup Universal', query);
 }
 
-export function getJobStatus(jobId, callback){
+export function getJobStatus(jobId){
 
   let endpoint = '/v2/bulk/jobs/' + jobId;
   let url = HOST + endpoint;
-  request(url, function (error, response, body) {
-    if (!error && response.statusCode == 200) {
-      let r = JSON.parse(body);
-      callback(r);
-    }
+  return new Promise(function (fulfill, reject){
+    request(url, function (error, response, body) {
+      if (!error && response.statusCode == 200) {
+        let r = JSON.parse(body);
+        fulfill(r);
+      }
+    });
   });
 
 }
 
-export function downloadProducts(jobID, callback){
+export function downloadProducts(jobID){
 
   let fileNameGzip = './files/' + jobID + '.jsonl.gz';
   let fileNameUnzip = './files/' + jobID + '.jsonl';
@@ -331,27 +353,31 @@ export function downloadProducts(jobID, callback){
   let writeStream = fs.createWriteStream(fileNameGzip);
   request(url).pipe(writeStream);
 
-  writeStream.on('finish', function(){
+  return new Promise(function (fulfill, reject){
 
-    fs.createReadStream(fileNameGzip)
-      // .pipe(zlib.createUnzip())
-      .pipe(
-        fs.createWriteStream(fileNameUnzip)
-          .on('finish', function(){
+    writeStream.on('finish', function(){
 
-            let products = [];
+      fs.createReadStream(fileNameGzip)
+        // .pipe(zlib.createUnzip())
+        .pipe(
+          fs.createWriteStream(fileNameUnzip)
+            .on('finish', function(){
 
-            let stream = byline(fs.createReadStream(fileNameUnzip, { encoding: 'utf8' }));
-            stream
-              .on('data', function(line) {
-                products.push(JSON.parse(line));
-              })
-              .on('end', function() {
-                callback(products);
-              });
+              let products = [];
 
-          })
-      );
+              let stream = byline(fs.createReadStream(fileNameUnzip, { encoding: 'utf8' }));
+              stream
+                .on('data', function(line) {
+                  products.push(JSON.parse(line));
+                })
+                .on('end', function() {
+                  fulfill(products);
+                });
+
+            })
+        );
+
+    });
 
   });
 
