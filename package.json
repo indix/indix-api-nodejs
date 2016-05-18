@@ -1,12 +1,12 @@
 {
   "name": "indix-api-nodejs",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Indix API NodeJS Client",
-  "main": "indix-api.js",
+  "main": "lib/indix-api.js",
   "scripts": {
     "tdd": "mocha --compilers js:babel-register --watch",
     "test": "mocha --compilers js:babel-register --timeout 5000",
-    "build": "babel src/indix-api.js -o indix-api.js",
+    "build": "babel src -d lib",
     "examples": "babel-node test/example.js"
   },
   "author": "Indix",
@@ -22,6 +22,7 @@
     "byline": "^4.2.1",
     "lodash": "^4.12.0",
     "nock": "^8.0.0",
-    "promise": "^7.1.1"
+    "promise": "^7.1.1",
+    "request": "^2.72.0"
   }
 }
