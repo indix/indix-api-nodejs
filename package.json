@@ -1,15 +1,14 @@
 {
-  "name": "indix-api-javascript",
+  "name": "indix-api-nodejs",
   "version": "0.1.0",
-  "description": "Indix API Javascript Client",
-  "main": "index.js",
+  "description": "Indix API NodeJS Client",
+  "main": "src/indix-api.js",
   "scripts": {
     "tdd": "mocha --compilers js:babel-register --watch",
     "test": "mocha --compilers js:babel-register --timeout 5000",
     "examples": "babel-node test/example.js"
   },
   "author": "Indix",
-  "license": "ISC",
   "devDependencies": {
     "babel-cli": "^6.9.0",
     "babel-preset-es2015": "^6.6.0",
