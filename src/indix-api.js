@@ -36,9 +36,9 @@ function getEntities(type, query){
         let r = JSON.parse(body);
         if(r.message == 'ok'){
           fulfill(r.result[type.toLowerCase()]);
-        } else {
-          reject(r);
         }
+      }else{
+        reject(body);
       }
     });
   });
@@ -76,9 +76,9 @@ export function getSearchSuggestions(query){
             return s.suggestion;
           });
           fulfill(s);
-        } else {
-          reject(r);
         }
+      }else{
+        reject(body);
       }
     });
   });
@@ -115,22 +115,22 @@ function getProducts(type, query){
 
     // Product Lookup Endpoints
     case 'Product Lookup Summary':
-      endpoint = '/v2/summary/' + query.mpid;
+      endpoint = '/v2/summary/products/' + query.mpid;
       break;
     case 'Product Lookup Offers Standard':
-      endpoint = '/v2/offersStandard/' + query.mpid;
+      endpoint = '/v2/offersStandard/products/' + query.mpid;
       break;
     case 'Product Lookup Offers Premium':
-      endpoint = '/v2/offersPremium/' + query.mpid;
+      endpoint = '/v2/offersPremium/products/' + query.mpid;
       break;
     case 'Product Lookup Catalog Standard':
-      endpoint = '/v2/catalogStandard/' + query.mpid;
+      endpoint = '/v2/catalogStandard/products/' + query.mpid;
       break;
     case 'Product Lookup Catalog Premium':
-      endpoint = '/v2/catalogPremium/' + query.mpid;
+      endpoint = '/v2/catalogPremium/products/' + query.mpid;
       break;
     case 'Product Lookup Universal':
-      endpoint = '/v2/universal/' + query.mpid;
+      endpoint = '/v2/universal/products/' + query.mpid;
       break;
   }
 
@@ -145,9 +145,9 @@ function getProducts(type, query){
         if(r.message == 'ok'){
           let returnValue = type.indexOf('Product Search') != -1 ? r.result.products : r.result.product;
           fulfill(returnValue);
-        }else{
-          reject(r);
         }
+      }else{
+        reject(body);
       }
 
     });
@@ -357,7 +357,7 @@ export function getBulkProductLookupUniversal(query){
 
 export function getJobStatus(jobId){
 
-  let endpoint = '/v2/bulk/jobs/' + jobId;
+  let endpoint = '/v2/bulk/jobs/' + jobId + '?app_id=' + appID + '&app_key=' + appKey;
   let url = HOST + endpoint;
   return new Promise(function (fulfill, reject){
     request(url, function (error, response, body) {
@@ -385,7 +385,7 @@ export function downloadProducts(jobID){
     writeStream.on('finish', function(){
 
       fs.createReadStream(fileNameGzip)
-        // .pipe(zlib.createUnzip())
+        .pipe(zlib.createUnzip())
         .pipe(
           fs.createWriteStream(fileNameUnzip)
             .on('finish', function(){

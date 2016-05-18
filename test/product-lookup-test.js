@@ -17,7 +17,7 @@ describe('Product Lookup', function() {
   it('summary should return the approppriate product with summary information', function(done){
 
     var stubData = JSON.parse(fs.readFileSync('test/stubs/product-lookup-summary.json', 'utf8'));
-    nock('https://api.indix.com').get('/v2/summary/8e1d8cd338ada38624d2f9322b259402?countryCode=US&app_id=APP_ID&app_key=APP_KEY').reply(200, stubData);
+    nock('https://api.indix.com').get('/v2/summary/products/8e1d8cd338ada38624d2f9322b259402?countryCode=US&app_id=APP_ID&app_key=APP_KEY').reply(200, stubData);
 
     var query = {
       mpid: '8e1d8cd338ada38624d2f9322b259402',
@@ -61,7 +61,7 @@ describe('Product Lookup', function() {
   it('offers standard should return the approppriate product with offers standard information', function(done){
 
     var stubData = JSON.parse(fs.readFileSync('test/stubs/product-lookup-offers-standard.json', 'utf8'));
-    nock('https://api.indix.com').get('/v2/offersStandard/8e1d8cd338ada38624d2f9322b259402?storeId=24&countryCode=US&app_id=APP_ID&app_key=APP_KEY').reply(200, stubData);
+    nock('https://api.indix.com').get('/v2/offersStandard/products/8e1d8cd338ada38624d2f9322b259402?storeId=24&countryCode=US&app_id=APP_ID&app_key=APP_KEY').reply(200, stubData);
 
     var query = {
       mpid: '8e1d8cd338ada38624d2f9322b259402',
@@ -106,7 +106,7 @@ describe('Product Lookup', function() {
   it('offers premium should return the approppriate product with offers premium information', function(done){
 
     var stubData = JSON.parse(fs.readFileSync('test/stubs/product-lookup-offers-premium.json', 'utf8'));
-    nock('https://api.indix.com').get('/v2/offersPremium/8e1d8cd338ada38624d2f9322b259402?countryCode=US&app_id=APP_ID&app_key=APP_KEY').reply(200, stubData);
+    nock('https://api.indix.com').get('/v2/offersPremium/products/8e1d8cd338ada38624d2f9322b259402?countryCode=US&app_id=APP_ID&app_key=APP_KEY').reply(200, stubData);
 
     var query = {
       mpid: '8e1d8cd338ada38624d2f9322b259402',
@@ -155,7 +155,7 @@ describe('Product Lookup', function() {
   it('catalog standard should return the approppriate product with catalog standard information', function(done){
 
     var stubData = JSON.parse(fs.readFileSync('test/stubs/product-lookup-catalog-standard.json', 'utf8'));
-    nock('https://api.indix.com').get('/v2/catalogStandard/8e1d8cd338ada38624d2f9322b259402?countryCode=US&app_id=APP_ID&app_key=APP_KEY').reply(200, stubData);
+    nock('https://api.indix.com').get('/v2/catalogStandard/products/8e1d8cd338ada38624d2f9322b259402?countryCode=US&app_id=APP_ID&app_key=APP_KEY').reply(200, stubData);
 
     var query = {
       mpid: '8e1d8cd338ada38624d2f9322b259402',
@@ -208,7 +208,7 @@ describe('Product Lookup', function() {
   it('catalog premium should return the approppriate product with catalog premium information', function(done){
 
     var stubData = JSON.parse(fs.readFileSync('test/stubs/product-lookup-catalog-premium.json', 'utf8'));
-    nock('https://api.indix.com').get('/v2/catalogPremium/8e1d8cd338ada38624d2f9322b259402?countryCode=US&app_id=APP_ID&app_key=APP_KEY').reply(200, stubData);
+    nock('https://api.indix.com').get('/v2/catalogPremium/products/8e1d8cd338ada38624d2f9322b259402?countryCode=US&app_id=APP_ID&app_key=APP_KEY').reply(200, stubData);
 
     var query = {
       mpid: '8e1d8cd338ada38624d2f9322b259402',
@@ -252,7 +252,7 @@ describe('Product Lookup', function() {
   it('universal should return the approppriate product with universal information', function(done){
 
     var stubData = JSON.parse(fs.readFileSync('test/stubs/product-lookup-universal.json', 'utf8'));
-    nock('https://api.indix.com').get('/v2/universal/8e1d8cd338ada38624d2f9322b259402?countryCode=US&app_id=APP_ID&app_key=APP_KEY').reply(200, stubData);
+    nock('https://api.indix.com').get('/v2/universal/products/8e1d8cd338ada38624d2f9322b259402?countryCode=US&app_id=APP_ID&app_key=APP_KEY').reply(200, stubData);
 
     var query = {
       mpid: '8e1d8cd338ada38624d2f9322b259402',
