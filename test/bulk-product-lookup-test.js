@@ -20,7 +20,7 @@ describe('Bulk Product Lookup', function() {
     nock('https://api.indix.com').post('/v2/summary/bulk/lookup').reply(200, stubData);
 
     var query = {
-      inputFile: fs.createReadStream('test/stubs/bulk-job-input.csv', 'utf8'),
+      inputFile: fs.createReadStream('test/stubs/bulk-job-input.txt', 'utf8'),
       countryCode: 'US'
     }
 
@@ -37,7 +37,7 @@ describe('Bulk Product Lookup', function() {
     nock('https://api.indix.com').post('/v2/offersStandard/bulk/lookup').reply(200, stubData);
 
     var query = {
-      inputFile: fs.createReadStream('test/stubs/bulk-job-input.csv', 'utf8'),
+      inputFile: fs.createReadStream('test/stubs/bulk-job-input.txt', 'utf8'),
       countryCode: 'US'
     }
 
@@ -54,7 +54,7 @@ describe('Bulk Product Lookup', function() {
     nock('https://api.indix.com').post('/v2/offersPremium/bulk/lookup').reply(200, stubData);
 
     var query = {
-      inputFile: fs.createReadStream('test/stubs/bulk-job-input.csv', 'utf8'),
+      inputFile: fs.createReadStream('test/stubs/bulk-job-input.txt', 'utf8'),
       countryCode: 'US'
     }
 
@@ -71,7 +71,7 @@ describe('Bulk Product Lookup', function() {
     nock('https://api.indix.com').post('/v2/catalogStandard/bulk/lookup').reply(200, stubData);
 
     var query = {
-      inputFile: fs.createReadStream('test/stubs/bulk-job-input.csv', 'utf8'),
+      inputFile: fs.createReadStream('test/stubs/bulk-job-input.txt', 'utf8'),
       countryCode: 'US'
     }
 
@@ -88,7 +88,7 @@ describe('Bulk Product Lookup', function() {
     nock('https://api.indix.com').post('/v2/catalogPremium/bulk/lookup').reply(200, stubData);
 
     var query = {
-      inputFile: fs.createReadStream('test/stubs/bulk-job-input.csv', 'utf8'),
+      inputFile: fs.createReadStream('test/stubs/bulk-job-input.txt', 'utf8'),
       countryCode: 'US'
     }
 
@@ -105,7 +105,7 @@ describe('Bulk Product Lookup', function() {
     nock('https://api.indix.com').post('/v2/universal/bulk/lookup').reply(200, stubData);
 
     var query = {
-      inputFile: fs.createReadStream('test/stubs/bulk-job-input.csv', 'utf8'),
+      inputFile: fs.createReadStream('test/stubs/bulk-job-input.txt', 'utf8'),
       countryCode: 'US'
     }
 
