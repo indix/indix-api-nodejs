@@ -4,8 +4,8 @@
   "description": "Indix API NodeJS Client",
   "main": "lib/indix-api.js",
   "scripts": {
-    "tdd": "mocha --compilers js:babel-register --watch",
-    "test": "mocha --compilers js:babel-register --timeout 5000",
+    "tdd": "mocha test/*-test.js --compilers js:babel-register --watch",
+    "test": "mocha test/*-test.js --compilers js:babel-register --timeout 5000",
     "coverage": "babel-node ./node_modules/.bin/isparta cover _mocha",
     "build": "babel src -d lib",
     "examples": "babel-node test/example.js"
