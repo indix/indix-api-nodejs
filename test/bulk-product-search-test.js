@@ -14,7 +14,7 @@ describe('Bulk Product Search', function() {
     });
   });
 
-  xit('bulk summary should return the approppriate products with bulk summary information', function(done){
+  it('bulk summary should return the approppriate products with bulk summary information', function(done){
 
     var stubData = { id: 1234, status: 'SUBMITTED' }
     nock('https://api.indix.com').post('/v2/summary/bulk/products').reply(200, stubData);
