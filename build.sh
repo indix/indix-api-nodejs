@@ -11,3 +11,5 @@ npm version "$GO_PIPELINE_LABEL"
 npm install
 
 npm run test
+
+npm run coverage
