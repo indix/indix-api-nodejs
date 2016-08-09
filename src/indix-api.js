@@ -13,6 +13,9 @@ let appID,
 const HOST = config.host;
 const VERSION = config.version;
 
+console.log(`HOST: ${HOST}`);
+console.log(`VERSION: ${VERSION}`);
+
 export function init(options){
   options = options || {};
   if(typeof options.appID == 'undefined' || typeof options.appKey == 'undefined'){
