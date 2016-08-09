@@ -5,11 +5,13 @@ import fs from 'fs';
 import zlib from 'zlib';
 import byline from 'byline';
 import Promise from 'promise';
+import config from 'config';
 
 let appID,
     appKey;
 
-const HOST = 'https://api.indix.com';
+const HOST = config.host;
+const VERSION = config.version;
 
 export function init(options){
   options = options || {};
@@ -25,7 +27,7 @@ function getEntities(type, query){
   query = query || {};
   _.assign(query, { appID: appID, appKey: appKey });
 
-  let endpoint = '/v2/' + type.toLowerCase();
+  let endpoint = '/' + VERSION + '/' + type.toLowerCase();
 
   let params = util.convertToQueryParams(query);
   let url = HOST + endpoint + '?' + params;
@@ -62,7 +64,7 @@ export function getSearchSuggestions(query){
   query = query || {};
   _.assign(query, { appID: appID, appKey: appKey });
 
-  let endpoint = '/v2/products/suggestions';
+  let endpoint = '/' + VERSION + '/products/suggestions';
 
   let params = util.convertToQueryParams(query);
   let url = HOST + endpoint + '?' + params;
@@ -95,42 +97,42 @@ function getProducts(type, query){
 
     // Product Search Endpoints
     case 'Product Search Summary':
-      endpoint = '/v2/summary/products';
+      endpoint = '/' + VERSION + '/summary/products';
       break;
     case 'Product Search Offers Standard':
-      endpoint = '/v2/offersStandard/products';
+      endpoint = '/' + VERSION + '/offersStandard/products';
       break;
     case 'Product Search Offers Premium':
-      endpoint = '/v2/offersPremium/products';
+      endpoint = '/' + VERSION + '/offersPremium/products';
       break;
     case 'Product Search Catalog Standard':
-      endpoint = '/v2/catalogStandard/products';
+      endpoint = '/' + VERSION + '/catalogStandard/products';
       break;
     case 'Product Search Catalog Premium':
-      endpoint = '/v2/catalogPremium/products';
+      endpoint = '/' + VERSION + '/catalogPremium/products';
       break;
     case 'Product Search Universal':
-      endpoint = '/v2/universal/products';
+      endpoint = '/' + VERSION + '/universal/products';
       break;
 
     // Product Lookup Endpoints
     case 'Product Lookup Summary':
-      endpoint = '/v2/summary/products/' + query.mpid;
+      endpoint = '/' + VERSION + '/summary/products/' + query.mpid;
       break;
     case 'Product Lookup Offers Standard':
-      endpoint = '/v2/offersStandard/products/' + query.mpid;
+      endpoint = '/' + VERSION + '/offersStandard/products/' + query.mpid;
       break;
     case 'Product Lookup Offers Premium':
-      endpoint = '/v2/offersPremium/products/' + query.mpid;
+      endpoint = '/' + VERSION + '/offersPremium/products/' + query.mpid;
       break;
     case 'Product Lookup Catalog Standard':
-      endpoint = '/v2/catalogStandard/products/' + query.mpid;
+      endpoint = '/' + VERSION + '/catalogStandard/products/' + query.mpid;
       break;
     case 'Product Lookup Catalog Premium':
-      endpoint = '/v2/catalogPremium/products/' + query.mpid;
+      endpoint = '/' + VERSION + '/catalogPremium/products/' + query.mpid;
       break;
     case 'Product Lookup Universal':
-      endpoint = '/v2/universal/products/' + query.mpid;
+      endpoint = '/' + VERSION + '/universal/products/' + query.mpid;
       break;
   }
 
@@ -215,42 +217,42 @@ function getBulkProducts(type, query){
 
     // Bulk Product Search Endpoints
     case 'Bulk Product Search Summary':
-      endpoint = '/v2/summary/bulk/products';
+      endpoint = '/' + VERSION + '/summary/bulk/products';
       break;
     case 'Bulk Product Search Offers Standard':
-      endpoint = '/v2/offersStandard/bulk/products';
+      endpoint = '/' + VERSION + '/offersStandard/bulk/products';
       break;
     case 'Bulk Product Search Offers Premium':
-      endpoint = '/v2/offersPremium/bulk/products';
+      endpoint = '/' + VERSION + '/offersPremium/bulk/products';
       break;
     case 'Bulk Product Search Catalog Standard':
-      endpoint = '/v2/catalogStandard/bulk/products';
+      endpoint = '/' + VERSION + '/catalogStandard/bulk/products';
       break;
     case 'Bulk Product Search Catalog Premium':
-      endpoint = '/v2/catalogPremium/bulk/products';
+      endpoint = '/' + VERSION + '/catalogPremium/bulk/products';
       break;
     case 'Bulk Product Search Universal':
-      endpoint = '/v2/universal/bulk/products';
+      endpoint = '/' + VERSION + '/universal/bulk/products';
       break;
 
     // Bulk Product Lookup Endpoints
     case 'Bulk Product Lookup Summary':
-      endpoint = '/v2/summary/bulk/lookup';
+      endpoint = '/' + VERSION + '/summary/bulk/lookup';
       break;
     case 'Bulk Product Lookup Offers Standard':
-      endpoint = '/v2/offersStandard/bulk/lookup';
+      endpoint = '/' + VERSION + '/offersStandard/bulk/lookup';
       break;
     case 'Bulk Product Lookup Offers Premium':
-      endpoint = '/v2/offersPremium/bulk/lookup';
+      endpoint = '/' + VERSION + '/offersPremium/bulk/lookup';
       break;
     case 'Bulk Product Lookup Catalog Standard':
-      endpoint = '/v2/catalogStandard/bulk/lookup';
+      endpoint = '/' + VERSION + '/catalogStandard/bulk/lookup';
       break;
     case 'Bulk Product Lookup Catalog Premium':
-      endpoint = '/v2/catalogPremium/bulk/lookup';
+      endpoint = '/' + VERSION + '/catalogPremium/bulk/lookup';
       break;
     case 'Bulk Product Lookup Universal':
-      endpoint = '/v2/universal/bulk/lookup';
+      endpoint = '/' + VERSION + '/universal/bulk/lookup';
       break;
   }
 
@@ -357,7 +359,7 @@ export function getBulkProductLookupUniversal(query){
 
 export function getJobStatus(jobId){
 
-  let endpoint = '/v2/bulk/jobs/' + jobId + '?app_id=' + appID + '&app_key=' + appKey;
+  let endpoint = '/' + VERSION + '/bulk/jobs/' + jobId + '?app_id=' + appID + '&app_key=' + appKey;
   let url = HOST + endpoint;
   return new Promise(function (fulfill, reject){
     request(url, function (error, response, body) {
@@ -375,7 +377,7 @@ export function downloadProducts(jobID){
   let fileNameGzip = './files/' + jobID + '.jsonl.gz';
   let fileNameUnzip = './files/' + jobID + '.jsonl';
 
-  let url = 'https://api.indix.com/v2/bulk/jobs/' + jobID + '/download?app_id=' + appID + '&app_key=' + appKey;
+  let url = 'https://api.indix.com/' + VERSION + '/bulk/jobs/' + jobID + '/download?app_id=' + appID + '&app_key=' + appKey;
 
   let writeStream = fs.createWriteStream(fileNameGzip);
   request(url).pipe(writeStream);
