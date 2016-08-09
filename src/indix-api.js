@@ -13,9 +13,6 @@ let appID,
 const HOST = config.host;
 const VERSION = config.version;
 
-console.log(`HOST: ${HOST}`);
-console.log(`VERSION: ${VERSION}`);
-
 export function init(options){
   options = options || {};
   if(typeof options.appID == 'undefined' || typeof options.appKey == 'undefined'){
@@ -23,6 +20,9 @@ export function init(options){
   }
   appID = options.appID;
   appKey = options.appKey;
+
+  HOST = typeof options.host != 'undefined' ? options.host : HOST;
+  VERSION = typeof options.version != 'undefined' ? options.version : VERSION;
 }
 
 function getEntities(type, query){
