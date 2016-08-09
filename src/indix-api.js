@@ -10,8 +10,8 @@ import config from 'config';
 let appID,
     appKey;
 
-const HOST = config.host;
-const VERSION = config.version;
+var HOST = config.host;
+var VERSION = config.version;
 
 export function init(options){
   options = options || {};
