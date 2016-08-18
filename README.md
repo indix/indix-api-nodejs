@@ -151,7 +151,7 @@ ixClient.getBulkProductLookupCatalogPremium();
 ixClient.getBulkProductLookupUniversal();
 ```
 
-### Input File Formats (in CSV)
+### Input File Formats
 #### MPN with Brand ID
 ```
 { "mpn": "1281HTWR", "brandId": 28860 }
