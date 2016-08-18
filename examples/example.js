@@ -2,8 +2,8 @@ import * as ixClient from '../src/indix-api';
 import fs from 'fs';
 
 ixClient.init({
-  appID: '426379c1',
-  appKey: '378157877b09f59fd2aa2f3239438bc7'
+  appID: 'YOUR_APP_ID',
+  appKey: 'YOUR_APP_KEY'
 });
 
 ixClient.getBrands({ q: 'Nike' }).then(function(results){
