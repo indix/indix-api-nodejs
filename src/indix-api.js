@@ -307,6 +307,10 @@ function getBulkProducts(type, query){
       }
     }
 
+    if(query.use_apigee == 'true'){
+      options.formData.use_apigee = 'true';
+    }
+
   }
 
   return new Promise(function (fulfill, reject){
