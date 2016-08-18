@@ -14,7 +14,7 @@ describe('Bulk Job Process', function() {
     });
   });
 
-  it('should poll for job status', function(done){
+  it('should poll for bulk job status', function(done){
 
     var stubData = { id: 1234, status: 'COMPLETED', count: 10000 }
     nock('https://api.indix.com').get('/v2/bulk/jobs/1234?app_id=APP_ID&app_key=APP_KEY').reply(200, stubData);
@@ -22,6 +22,20 @@ describe('Bulk Job Process', function() {
     var jobID = 1234;
 
     ixClient.getJobStatus(jobID).then(function(result){
+      result.should.be.like({ id: 1234, status: 'COMPLETED', count: 10000 });
+      done();
+    });
+
+  });
+
+  it('should poll for ASE job status', function(done){
+
+    var stubData = { id: 1234, status: 'COMPLETED', count: 10000 }
+    nock('https://api.indix.com').get('/v2/bulk/ase/1234?app_id=APP_ID&app_key=APP_KEY').reply(200, stubData);
+
+    var jobID = 1234;
+
+    ixClient.getASEJobStatus(jobID).then(function(result){
       result.should.be.like({ id: 1234, status: 'COMPLETED', count: 10000 });
       done();
     });

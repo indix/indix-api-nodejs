@@ -122,3 +122,28 @@ ixClient.getBulkProductLookupSummary({
   poll(result.id);
 
 });
+
+ixClient.getASELookupUniversal({
+  inputFile: fs.createReadStream('test/stubs/ase-job-input.txt', 'utf8'),
+  countryCode: 'US'
+}).then(function(result){
+
+  var poll = function(jobId){
+    ixClient.getASEJobStatus(jobId).then(function(jobInfo){
+      console.log(jobInfo);
+      if(jobInfo.status != 'SUCCESS'){
+        setTimeout(function(){
+          poll(jobId);
+        }, 5000);
+      }else{
+        ixClient.downloadASEProducts(jobId).then(function(products){
+          console.log('done');
+          console.log(products.length);
+        });
+      }
+    });
+  }
+
+  poll(result.id);
+
+});
