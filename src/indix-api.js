@@ -12,8 +12,6 @@ let appID,
 
 var HOST = config.host;
 var VERSION = config.version;
-console.log(HOST);
-console.log(VERSION);
 
 export function init(options){
   options = options || {};
@@ -26,10 +24,10 @@ export function init(options){
   HOST = typeof options.host != 'undefined' ? options.host : HOST;
   VERSION = typeof options.version != 'undefined' ? options.version : VERSION;
 
-  console.log(appID);
-  console.log(appKey);
-  console.log(HOST);
-  console.log(VERSION);
+  console.log(`App ID: ${appID}`);
+  console.log(`App Key: ${appKey}`);
+  console.log(`Host: ${HOST}`);
+  console.log(`Version: ${VERSION}`);
 }
 
 function getEntities(type, query){
@@ -264,6 +262,12 @@ function getBulkProducts(type, query){
     case 'Bulk Product Lookup Universal':
       endpoint = '/' + VERSION + '/universal/bulk/lookup';
       break;
+
+    // Advanced Search Lookup Endpoints
+    case 'ASE Lookup Universal':
+      endpoint = '/' + VERSION + '/universal/bulk/ase';
+      break;
+
   }
 
   let options = {};
@@ -307,7 +311,9 @@ function getBulkProducts(type, query){
 
   return new Promise(function (fulfill, reject){
 
+    console.log(options);
     request.post(options, function (error, response, body) {
+      console.log(body);
       if (!error && response.statusCode == 200) {
         fulfill(JSON.parse(body));
       }else{
@@ -367,9 +373,18 @@ export function getBulkProductLookupUniversal(query){
   return getBulkProducts('Bulk Product Lookup Universal', query);
 }
 
-export function getJobStatus(jobId){
+export function getASELookupUniversal(query){
+  return getBulkProducts('ASE Lookup Universal', query);
+}
 
-  let endpoint = '/' + VERSION + '/bulk/jobs/' + jobId + '?app_id=' + appID + '&app_key=' + appKey;
+function _getJobStatus(jobId, type){
+
+  var endpoint;
+  if(type == 'ASE'){
+    endpoint = '/' + VERSION + '/bulk/ase/' + jobId + '?app_id=' + appID + '&app_key=' + appKey;
+  } else {
+    endpoint = '/' + VERSION + '/bulk/jobs/' + jobId + '?app_id=' + appID + '&app_key=' + appKey;
+  }
   let url = HOST + endpoint;
   return new Promise(function (fulfill, reject){
     request(url, function (error, response, body) {
@@ -382,12 +397,25 @@ export function getJobStatus(jobId){
 
 }
 
-export function downloadProducts(jobID){
+export function getJobStatus(jobId){
+  return _getJobStatus(jobId);
+}
+
+export function getASEJobStatus(jobId){
+  return _getJobStatus(jobId, 'ASE');
+}
+
+function _downloadProducts(jobID){
 
   let fileNameGzip = './files/' + jobID + '.jsonl.gz';
   let fileNameUnzip = './files/' + jobID + '.jsonl';
 
-  let url = 'https://api.indix.com/' + VERSION + '/bulk/jobs/' + jobID + '/download?app_id=' + appID + '&app_key=' + appKey;
+  var url;
+  if(type == 'ASE'){
+    url = 'https://api.indix.com/' + VERSION + '/bulk/ase/' + jobID + '/download?app_id=' + appID + '&app_key=' + appKey;
+  } else {
+    url = 'https://api.indix.com/' + VERSION + '/bulk/jobs/' + jobID + '/download?app_id=' + appID + '&app_key=' + appKey;
+  }
 
   let writeStream = fs.createWriteStream(fileNameGzip);
   request(url).pipe(writeStream);
@@ -420,4 +448,12 @@ export function downloadProducts(jobID){
 
   });
 
+}
+
+export function downloadProducts(jobID){
+  return _downloadProducts(jobID);
+}
+
+export function downloadASEProducts(jobID){
+  return _downloadProducts(jobID, 'ASE');
 }
