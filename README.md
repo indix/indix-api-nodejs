@@ -15,7 +15,6 @@ The client needs to be first instantiated with the appropriate application id an
 ```js
 var ixClient = require('indix-api-nodejs');
 ixClient.init({
-  appID: 'APP_ID',
   appKey: 'APP_KEY'
 });
 ```
