@@ -5,7 +5,7 @@ import fs from 'fs';
 import zlib from 'zlib';
 import byline from 'byline';
 import Promise from 'promise';
-import config from 'config';
+var config = require(`../config/${process.env.NODE_ENV || 'default'}`);
 
 let appID,
     appKey;
@@ -15,8 +15,8 @@ var VERSION = config.version;
 
 export function init(options){
   options = options || {};
-  if(typeof options.appID == 'undefined' || typeof options.appKey == 'undefined'){
-    throw 'A valid App ID and App Key must be provided to initialize the Indix API Client.';
+  if(typeof options.appKey == 'undefined'){
+    throw 'A valid App Key must be provided to initialize the Indix API Client.';
   }
   appID = options.appID;
   appKey = options.appKey;
@@ -24,7 +24,7 @@ export function init(options){
   HOST = typeof options.host != 'undefined' ? options.host : HOST;
   VERSION = typeof options.version != 'undefined' ? options.version : VERSION;
 
-  console.log(`App ID: ${appID}`);
+  if(typeof appID != 'undefined'){ console.log(`App ID: ${appID}`); }
   console.log(`App Key: ${appKey}`);
   console.log(`Host: ${HOST}`);
   console.log(`Version: ${VERSION}`);

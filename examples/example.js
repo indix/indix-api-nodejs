@@ -2,7 +2,6 @@ import * as ixClient from '../src/indix-api';
 import fs from 'fs';
 
 ixClient.init({
-  appID: 'YOUR_APP_ID',
   appKey: 'YOUR_APP_KEY'
 });
 
