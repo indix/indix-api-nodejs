@@ -7,14 +7,14 @@ import fs from 'fs';
 
 describe('Initialization', function() {
 
-  it('should ensure that App ID and App Key are provided', function() {
+  it('should ensure that App Key is provided', function() {
     var e = '';
     try{
       ixClient.init();
     }catch(ex){
       e = ex;
     }finally{
-      e.should.equal('A valid App ID and App Key must be provided to initialize the Indix API Client.')
+      e.should.equal('A valid App Key must be provided to initialize the Indix API Client.')
     }
   });
 
