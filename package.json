@@ -18,7 +18,7 @@
     "@types/byline": "4.2.31",
     "@types/config": "0.0.32",
     "@types/debug": "0.0.29",
-    "@types/lodash": "^4.14.61",
+    "@types/lodash": "4.14.61",
     "@types/nock": "8.2.1",
     "@types/node": "7.0.12",
     "@types/request": "0.0.42",
@@ -29,6 +29,8 @@
     "isparta": "4.0.0",
     "istanbul": "0.4.5",
     "mocha": "3.2.0",
+    "tslint": "5.0.0",
+    "tslint-config-airbnb": "1.1.1",
     "typescript": "next"
   },
   "dependencies": {
@@ -36,7 +38,7 @@
     "byline": "5.0.0",
     "config": "1.25.1",
     "debug": "2.6.3",
-    "lodash": "^4.17.4",
+    "lodash": "4.17.4",
     "nock": "9.0.11",
     "request": "2.81.0"
   }
