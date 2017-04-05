@@ -1,6 +1,6 @@
 import {camelCase, snakeCase} from 'lodash';
 
-export type QueryParamValue = number | string | Array<number | string>;
+export type QueryParamValue = string | Array<string>;
 
 export interface ISuggestion {
   [key: string]: string;
@@ -14,20 +14,35 @@ export interface ISuggestion {
 export interface IQueryObject {
   [key: string]: QueryParamValue;
   /**
-   * Unique identifier key for your app. Mandatory.
+   * Unique identifier key for your app.
    * 
    * If you don't have one, visit http://www.indix.com/product-api-free-trial/
    * Existing users can find their app key by logging into https://developer.indix.com/
    */
   appKey?: string;
+  /**
+   * API server hostname.
+   *
+   * Defaults to "https://api.indix.com"
+   */
   host?: string;
+  /**
+   * API version.
+   *
+   * Defaults to "v2"
+   */
   version?: string;
+  /**
+   * Store ID.
+   *
+   * Limits results to products sold at given store.
+   */
   storeId?: QueryParamValue;
   alsoSoldAt?: QueryParamValue;
   brandId?: QueryParamValue;
   categoryId?: QueryParamValue;
   facetBy?: QueryParamValue;
-  mpid?: number | string;
+  mpid?: string;
   inputFile?: string;
 }
 
