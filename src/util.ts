@@ -1,6 +1,6 @@
 import {camelCase, snakeCase} from 'lodash';
 
-type QueryParamValue = number | string | Array<number | string>;
+export type QueryParamValue = number | string | Array<number | string>;
 
 export interface ISuggestion {
   [key: string]: string,
