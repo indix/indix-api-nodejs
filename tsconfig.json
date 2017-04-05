@@ -1,15 +1,19 @@
 {
     "compilerOptions": {
         "outDir": "./lib",
-        "allowJs": true,
         "target": "es5",
         "module": "commonjs",
         "moduleResolution": "node",
         "noImplicitAny": true,
         "allowSyntheticDefaultImports": true,
-        "sourceMap": true
+        "sourceMap": true,
+        "declaration": true,
+        "declarationDir": "./lib"
     },
     "include": [
         "./src/**/*.ts"
+    ],
+    "exclude": [
+        "node_modules"
     ]
 }
