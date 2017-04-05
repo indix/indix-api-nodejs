@@ -135,16 +135,15 @@ function getProducts(type: string, query: util.IQueryObject) {
       break;
   }
 
-  let params = util.convertToQueryParams(query);
-  let url = HOST + endpoint + '?' + params;
+  const params = util.convertToQueryParams(query);
+  const url = HOST + endpoint + '?' + params;
 
-  return new Promise(function (fulfill, reject) {
-
-    request(url, function (error, response, body) {
-      if (!error && response.statusCode == 200) {
-        let r = JSON.parse(body);
-        if (r.message == 'ok') {
-          let returnValue = type.indexOf('Product Search') != -1 ? r.result.products : r.result.product;
+  return new Promise((fulfill, reject) => {
+    request(url, (error, response, body) => {
+      if (!error && response.statusCode === 200) {
+        const r = JSON.parse(body);
+        if (r.message === 'ok') {
+          const returnValue = type.indexOf('Product Search') !== -1 ? r.result.products : r.result.product;
           fulfill(returnValue);
         }
       } else {
@@ -261,41 +260,41 @@ function getBulkProducts(type: string, query: util.IQueryObject) {
 
   }
 
-  let inputFile = query.inputFile;
-  let params = util.convertToQueryParams(query);
-  let url = HOST + endpoint;
+  const inputFile = query.inputFile;
+  const params = util.convertToQueryParams(query);
+  const url = HOST + endpoint;
   let options: request.OptionsWithUrl;
 
-  if (type.indexOf('Product Search') != -1) {
+  if (type.indexOf('Product Search') !== -1) {
     options = {
       url,
       method: 'POST',
       headers: {
-        'content-type': 'application/x-www-form-urlencoded'
+        'content-type': 'application/x-www-form-urlencoded',
       },
-      form: params
-    }
+      form: params,
+    };
   } else {
     options = {
       url,
       method: 'POST',
       headers: {
         'cache-control': 'no-cache',
-        'content-type': 'multipart/form-data; boundary=---011000010111000001101001'
+        'content-type': 'multipart/form-data; boundary=---011000010111000001101001',
       },
       formData: {
         file: {
           value: inputFile,
           options: {
-            contentType: null
-          }
+            contentType: null,
+          },
         },
         app_key: appKey,
-        countryCode: query.countryCode
-      }
-    }
+        countryCode: query.countryCode,
+      },
+    };
 
-    if (query.use_apigee == 'true') {
+    if (query.use_apigee === 'true') {
       options.formData.use_apigee = 'true';
     }
   }
@@ -305,7 +304,7 @@ function getBulkProducts(type: string, query: util.IQueryObject) {
     log(options);
     request.post(options, (error, response, body) => {
       log(body);
-      if (!error && response.statusCode == 200) {
+      if (!error && response.statusCode === 200) {
         resolve(JSON.parse(body));
       } else {
         reject(JSON.parse(body));
@@ -370,17 +369,17 @@ export function getASELookupUniversal(query: util.IQueryObject) {
 
 function _getJobStatus(jobId: string, type?: string) {
 
-  var endpoint;
-  if (type == 'ASE') {
+  let endpoint;
+  if (type === 'ASE') {
     endpoint = '/' + VERSION + '/bulk/ase/' + jobId + '?app_key=' + appKey;
   } else {
     endpoint = '/' + VERSION + '/bulk/jobs/' + jobId + '?app_key=' + appKey;
   }
-  let url = HOST + endpoint;
+  const url = HOST + endpoint;
   return new Promise((resolve, reject) => {
     request(url, (error, response, body) => {
       if (!error && response.statusCode === 200) {
-        let r = JSON.parse(body);
+        const r = JSON.parse(body);
         resolve(r);
       }
     });
@@ -398,17 +397,17 @@ export function getASEJobStatus(jobId: string) {
 
 function _downloadProducts(jobID: string, type?: string) {
 
-  let fileNameGzip = './files/' + jobID + '.jsonl.gz';
-  let fileNameUnzip = './files/' + jobID + '.jsonl';
+  const fileNameGzip = './files/' + jobID + '.jsonl.gz';
+  const fileNameUnzip = './files/' + jobID + '.jsonl';
 
-  var url;
-  if (type == 'ASE') {
+  let url;
+  if (type === 'ASE') {
     url = 'https://api.indix.com/' + VERSION + '/bulk/ase/' + jobID + '/download?app_key=' + appKey;
   } else {
     url = 'https://api.indix.com/' + VERSION + '/bulk/jobs/' + jobID + '/download?app_key=' + appKey;
   }
 
-  let writeStream = fs.createWriteStream(fileNameGzip);
+  const writeStream = fs.createWriteStream(fileNameGzip);
   request(url).pipe(writeStream);
 
   return new Promise((resolve, reject) => {
@@ -419,17 +418,17 @@ function _downloadProducts(jobID: string, type?: string) {
         .pipe(
         fs.createWriteStream(fileNameUnzip)
           .on('finish', () => {
-            let products: Array<Object> = [];
-            let stream = byline(fs.createReadStream(fileNameUnzip, { encoding: 'utf8' }));
+            const products: Array<Object> = [];
+            const stream = byline(fs.createReadStream(fileNameUnzip, { encoding: 'utf8' }));
             stream
               .on('data', (line: string) => {
                 products.push(JSON.parse(line));
               })
-              .on('end', function () {
+              .on('end', () => {
                 resolve(products);
               });
-          })
-        );
+          }),
+      );
     });
   });
 }

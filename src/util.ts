@@ -3,8 +3,8 @@ import {camelCase, snakeCase} from 'lodash';
 export type QueryParamValue = number | string | Array<number | string>;
 
 export interface ISuggestion {
-  [key: string]: string,
-  suggestion: string
+  [key: string]: string;
+  suggestion: string;
 }
 
 /**
@@ -12,34 +12,34 @@ export interface ISuggestion {
  * This contains all the query parameters and the client options.
  */
 export interface IQueryObject {
-  [key: string]: QueryParamValue,
+  [key: string]: QueryParamValue;
   /**
    * Unique identifier key for your app. Mandatory.
    * 
    * If you don't have one, visit http://www.indix.com/product-api-free-trial/
    * Existing users can find their app key by logging into https://developer.indix.com/
    */
-  appKey?: string,
-  host?: string,
-  version?: string,
-  storeId?: QueryParamValue,
-  alsoSoldAt?: QueryParamValue,
-  brandId?: QueryParamValue,
-  categoryId?: QueryParamValue,
-  facetBy?: QueryParamValue,
-  mpid?: number | string,
-  inputFile?: string,
+  appKey?: string;
+  host?: string;
+  version?: string;
+  storeId?: QueryParamValue;
+  alsoSoldAt?: QueryParamValue;
+  brandId?: QueryParamValue;
+  categoryId?: QueryParamValue;
+  facetBy?: QueryParamValue;
+  mpid?: number | string;
+  inputFile?: string;
 }
 
 export function convertToQueryParams(queryObject: IQueryObject) {
 
-  let queryObj = { ...queryObject };
+  const queryObj = { ...queryObject };
 
   delete queryObj['mpid'];
   delete queryObj['inputFile'];
 
-  let returnValue: Array<string> = [];
-  for (let queryParam of Object.getOwnPropertyNames(queryObj)) {
+  const returnValue: Array<string> = [];
+  for (const queryParam of Object.getOwnPropertyNames(queryObj)) {
     switch (queryParam) {
       case 'appKey':
         returnValue.push(`${snakeCase(queryParam)}=${queryObj[queryParam]}`);
@@ -51,7 +51,7 @@ export function convertToQueryParams(queryObject: IQueryObject) {
       case 'facetBy':
         if (Array.isArray(queryObj[queryParam])) {
           for (const item of queryObj[queryParam] as Array<{}>) {
-            returnValue.push(`${queryParam}=${queryObj[queryParam]}`)
+            returnValue.push(`${queryParam}=${queryObj[queryParam]}`);
           }
         } else {
           returnValue.push(`${queryParam}=${queryObj[queryParam]}`);
@@ -61,5 +61,5 @@ export function convertToQueryParams(queryObject: IQueryObject) {
         returnValue.push(`${queryParam}=${queryObj[queryParam]}`);
     }
   }
-  return returnValue.join('&')
+  return returnValue.join('&');
 }
