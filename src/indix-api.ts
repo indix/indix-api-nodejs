@@ -1,110 +1,98 @@
-import _ from 'lodash';
-import request from 'request';
-import * as util from './util.js';
-import fs from 'fs';
-import zlib from 'zlib';
-import byline from 'byline';
-import Promise from 'promise';
-import Debug from 'debug';
-var config = require(`../config/${process.env.NODE_ENV || 'default'}`);
+import * as fs from 'fs';
+import * as request from 'request';
+import * as Promise from 'bluebird';
+import * as zlib from 'zlib';
+import * as byline from 'byline';
+import * as util from './util';
+import * as debug from 'debug';
 
-let appID,
-    appKey;
+const config = require(`../config/${process.env.NODE_ENV || 'default'}`);
 
-var HOST = config.host;
-var VERSION = config.version;
+let appKey: string;
 
-const log = Debug('indix-api');
+let HOST = config.host;
+let VERSION = config.version;
 
-export function init(options){
+const log = debug('indix-api');
+
+export function init(options: util.IQueryObject) {
   options = options || {};
-  if(typeof options.appKey == 'undefined'){
-    throw 'A valid App Key must be provided to initialize the Indix API Client.';
-  }
-  appID = options.appID;
   appKey = options.appKey;
 
-  HOST = typeof options.host != 'undefined' ? options.host : HOST;
-  VERSION = typeof options.version != 'undefined' ? options.version : VERSION;
+  HOST = options.host || HOST;
+  VERSION = options.version || VERSION;
 
-  if(typeof appID != 'undefined'){ log(`App ID: ${appID}`); }
   log(`App Key: ${appKey}`);
   log(`Host: ${HOST}`);
   log(`Version: ${VERSION}`);
 }
 
-function getEntities(type, query){
+function getEntities(type: string, query?: util.IQueryObject) {
 
   query = query || {};
-  _.assign(query, { appID: appID, appKey: appKey });
+  query = (<any>Object).assign(query, { appKey });
 
-  let endpoint = '/' + VERSION + '/' + type.toLowerCase();
+  const endpoint = `/${VERSION}/${type.toLowerCase()}`;
+  const params = util.convertToQueryParams(query);
+  const url = `${HOST}${endpoint}?${params}`;
 
-  let params = util.convertToQueryParams(query);
-  let url = HOST + endpoint + '?' + params;
-
-  return new Promise(function (fulfill, reject){
-    request(url, function (error, response, body) {
-      if (!error && response.statusCode == 200) {
-        let r = JSON.parse(body);
-        if(r.message == 'ok'){
-          fulfill(r.result[type.toLowerCase()]);
+  return new Promise((resolve, reject) => {
+    request(url, (error, response, body) => {
+      if (!error && response.statusCode === 200) {
+        const result = JSON.parse(body);
+        if (result.message === 'ok') {
+          resolve(result.result[type.toLowerCase()]);
         }
-      }else{
+      } else {
         reject(body);
       }
     });
   });
-
 }
 
-export function getBrands(query){
+export function getBrands(query: util.IQueryObject) {
   return getEntities('Brands', query);
 }
 
-export function getStores(query){
+export function getStores(query: util.IQueryObject) {
   return getEntities('Stores', query);
 }
 
-export function getCategories(){
+export function getCategories() {
   return getEntities('Categories');
 }
 
-export function getSearchSuggestions(query){
+export function getSearchSuggestions(query: util.IQueryObject) {
 
   query = query || {};
-  _.assign(query, { appID: appID, appKey: appKey });
+  query = (<any>Object).assign(query, { appKey });
 
-  let endpoint = '/' + VERSION + '/products/suggestions';
+  const endpoint = `/${VERSION}/products/suggestions`;
+  const params = util.convertToQueryParams(query);
+  const url = `${HOST}${endpoint}?${params}`;
 
-  let params = util.convertToQueryParams(query);
-  let url = HOST + endpoint + '?' + params;
-
-  return new Promise(function (fulfill, reject){
-    request(url, function (error, response, body) {
-      if (!error && response.statusCode == 200) {
-        let r = JSON.parse(body);
-        if(r.message == 'ok'){
-          let s = _.map(r.result.suggestions, function(s){
-            return s.suggestion;
-          });
-          fulfill(s);
+  return new Promise((resolve, reject) => {
+    request(url, (error, response, body) => {
+      if (!error && response.statusCode === 200) {
+        const result = JSON.parse(body);
+        if (result.message === 'ok') {
+          const finalResponse = result.result.suggestions.map((suggestItem: util.ISuggestion) => suggestItem.suggestion);
+          resolve(finalResponse);
         }
-      }else{
-        reject(body);
       }
+      reject(body);
     });
   });
 }
 
-function getProducts(type, query){
+function getProducts(type: string, query: util.IQueryObject) {
 
   query = query || {};
-  _.assign(query, { appID: appID, appKey: appKey });
+  query = (<any>Object).assign(query, { appKey });
 
   let endpoint;
 
-  switch(type){
+  switch (type) {
 
     // Product Search Endpoints
     case 'Product Search Summary':
@@ -150,16 +138,16 @@ function getProducts(type, query){
   let params = util.convertToQueryParams(query);
   let url = HOST + endpoint + '?' + params;
 
-  return new Promise(function (fulfill, reject){
+  return new Promise(function (fulfill, reject) {
 
     request(url, function (error, response, body) {
       if (!error && response.statusCode == 200) {
         let r = JSON.parse(body);
-        if(r.message == 'ok'){
+        if (r.message == 'ok') {
           let returnValue = type.indexOf('Product Search') != -1 ? r.result.products : r.result.product;
           fulfill(returnValue);
         }
-      }else{
+      } else {
         reject(body);
       }
 
@@ -169,62 +157,62 @@ function getProducts(type, query){
 
 }
 
-export function getProductSummary(query){
+export function getProductSummary(query: util.IQueryObject) {
   return getProducts('Product Search Summary', query);
 }
 
-export function getProductOffersStandard(query){
+export function getProductOffersStandard(query: util.IQueryObject) {
   return getProducts('Product Search Offers Standard', query);
 }
 
-export function getProductOffersPremium(query){
+export function getProductOffersPremium(query: util.IQueryObject) {
   return getProducts('Product Search Offers Premium', query);
 }
 
-export function getProductCatalogStandard(query){
+export function getProductCatalogStandard(query: util.IQueryObject) {
   return getProducts('Product Search Catalog Standard', query);
 }
 
-export function getProductCatalogPremium(query){
+export function getProductCatalogPremium(query: util.IQueryObject) {
   return getProducts('Product Search Catalog Premium', query);
 }
 
-export function getProductUniversal(query){
+export function getProductUniversal(query: util.IQueryObject) {
   return getProducts('Product Search Universal', query);
 }
 
-export function getProductLookupSummary(query){
+export function getProductLookupSummary(query: util.IQueryObject) {
   return getProducts('Product Lookup Summary', query);
 }
 
-export function getProductLookupOffersStandard(query){
+export function getProductLookupOffersStandard(query: util.IQueryObject) {
   return getProducts('Product Lookup Offers Standard', query);
 }
 
-export function getProductLookupOffersPremium(query){
+export function getProductLookupOffersPremium(query: util.IQueryObject) {
   return getProducts('Product Lookup Offers Premium', query);
 }
 
-export function getProductLookupCatalogStandard(query){
+export function getProductLookupCatalogStandard(query: util.IQueryObject) {
   return getProducts('Product Lookup Catalog Standard', query);
 }
 
-export function getProductLookupCatalogPremium(query){
+export function getProductLookupCatalogPremium(query: util.IQueryObject) {
   return getProducts('Product Lookup Catalog Premium', query);
 }
 
-export function getProductLookupUniversal(query){
+export function getProductLookupUniversal(query: util.IQueryObject) {
   return getProducts('Product Lookup Universal', query);
 }
 
-function getBulkProducts(type, query){
+function getBulkProducts(type: string, query: util.IQueryObject) {
 
   query = query || {};
-  _.assign(query, { appID: appID, appKey: appKey });
+  query = (<any>Object).assign(query, { appKey });
 
   let endpoint;
 
-  switch(type){
+  switch (type) {
 
     // Bulk Product Search Endpoints
     case 'Bulk Product Search Summary':
@@ -273,28 +261,24 @@ function getBulkProducts(type, query){
 
   }
 
-  let options = {};
-
   let inputFile = query.inputFile;
   let params = util.convertToQueryParams(query);
   let url = HOST + endpoint;
+  let options: request.OptionsWithUrl;
 
-  if(type.indexOf('Product Search') != -1){
-
+  if (type.indexOf('Product Search') != -1) {
     options = {
+      url,
       method: 'POST',
-      url: url,
       headers: {
         'content-type': 'application/x-www-form-urlencoded'
       },
       form: params
     }
-
   } else {
-
     options = {
+      url,
       method: 'POST',
-      url: url,
       headers: {
         'cache-control': 'no-cache',
         'content-type': 'multipart/form-data; boundary=---011000010111000001101001'
@@ -302,28 +286,28 @@ function getBulkProducts(type, query){
       formData: {
         file: {
           value: inputFile,
-          options: { contentType: null }
+          options: {
+            contentType: null
+          }
         },
-        app_id: appID,
         app_key: appKey,
         countryCode: query.countryCode
       }
     }
 
-    if(query.use_apigee == 'true'){
+    if (query.use_apigee == 'true') {
       options.formData.use_apigee = 'true';
     }
-
   }
 
-  return new Promise(function (fulfill, reject){
+  return new Promise((resolve, reject) => {
 
     log(options);
-    request.post(options, function (error, response, body) {
+    request.post(options, (error, response, body) => {
       log(body);
       if (!error && response.statusCode == 200) {
-        fulfill(JSON.parse(body));
-      }else{
+        resolve(JSON.parse(body));
+      } else {
         reject(JSON.parse(body));
       }
     });
@@ -332,135 +316,128 @@ function getBulkProducts(type, query){
 
 }
 
-export function getBulkProductSummary(query){
+export function getBulkProductSummary(query: util.IQueryObject) {
   return getBulkProducts('Bulk Product Search Summary', query);
 }
 
-export function getBulkProductOffersStandard(query){
+export function getBulkProductOffersStandard(query: util.IQueryObject) {
   return getBulkProducts('Bulk Product Search Offers Standard', query);
 }
 
-export function getBulkProductOffersPremium(query){
+export function getBulkProductOffersPremium(query: util.IQueryObject) {
   return getBulkProducts('Bulk Product Search Offers Premium', query);
 }
 
-export function getBulkProductCatalogStandard(query){
+export function getBulkProductCatalogStandard(query: util.IQueryObject) {
   return getBulkProducts('Bulk Product Search Catalog Standard', query);
 }
 
-export function getBulkProductCatalogPremium(query){
+export function getBulkProductCatalogPremium(query: util.IQueryObject) {
   return getBulkProducts('Bulk Product Search Catalog Premium', query);
 }
 
-export function getBulkProductUniversal(query){
+export function getBulkProductUniversal(query: util.IQueryObject) {
   return getBulkProducts('Bulk Product Search Universal', query);
 }
 
-export function getBulkProductLookupSummary(query){
+export function getBulkProductLookupSummary(query: util.IQueryObject) {
   return getBulkProducts('Bulk Product Lookup Summary', query);
 }
 
-export function getBulkProductLookupOffersStandard(query){
+export function getBulkProductLookupOffersStandard(query: util.IQueryObject) {
   return getBulkProducts('Bulk Product Lookup Offers Standard', query);
 }
 
-export function getBulkProductLookupOffersPremium(query){
+export function getBulkProductLookupOffersPremium(query: util.IQueryObject) {
   return getBulkProducts('Bulk Product Lookup Offers Premium', query);
 }
 
-export function getBulkProductLookupCatalogStandard(query){
+export function getBulkProductLookupCatalogStandard(query: util.IQueryObject) {
   return getBulkProducts('Bulk Product Lookup Catalog Standard', query);
 }
 
-export function getBulkProductLookupCatalogPremium(query){
+export function getBulkProductLookupCatalogPremium(query: util.IQueryObject) {
   return getBulkProducts('Bulk Product Lookup Catalog Premium', query);
 }
 
-export function getBulkProductLookupUniversal(query){
+export function getBulkProductLookupUniversal(query: util.IQueryObject) {
   return getBulkProducts('Bulk Product Lookup Universal', query);
 }
 
-export function getASELookupUniversal(query){
+export function getASELookupUniversal(query: util.IQueryObject) {
   return getBulkProducts('ASE Lookup Universal', query);
 }
 
-function _getJobStatus(jobId, type){
+function _getJobStatus(jobId: string, type?: string) {
 
   var endpoint;
-  if(type == 'ASE'){
-    endpoint = '/' + VERSION + '/bulk/ase/' + jobId + '?app_id=' + appID + '&app_key=' + appKey;
+  if (type == 'ASE') {
+    endpoint = '/' + VERSION + '/bulk/ase/' + jobId + '?app_key=' + appKey;
   } else {
-    endpoint = '/' + VERSION + '/bulk/jobs/' + jobId + '?app_id=' + appID + '&app_key=' + appKey;
+    endpoint = '/' + VERSION + '/bulk/jobs/' + jobId + '?app_key=' + appKey;
   }
   let url = HOST + endpoint;
-  return new Promise(function (fulfill, reject){
-    request(url, function (error, response, body) {
-      if (!error && response.statusCode == 200) {
+  return new Promise((resolve, reject) => {
+    request(url, (error, response, body) => {
+      if (!error && response.statusCode === 200) {
         let r = JSON.parse(body);
-        fulfill(r);
+        resolve(r);
       }
     });
   });
 
 }
 
-export function getJobStatus(jobId){
+export function getJobStatus(jobId: string) {
   return _getJobStatus(jobId);
 }
 
-export function getASEJobStatus(jobId){
+export function getASEJobStatus(jobId: string) {
   return _getJobStatus(jobId, 'ASE');
 }
 
-function _downloadProducts(jobID){
+function _downloadProducts(jobID: string, type?: string) {
 
   let fileNameGzip = './files/' + jobID + '.jsonl.gz';
   let fileNameUnzip = './files/' + jobID + '.jsonl';
 
   var url;
-  if(type == 'ASE'){
-    url = 'https://api.indix.com/' + VERSION + '/bulk/ase/' + jobID + '/download?app_id=' + appID + '&app_key=' + appKey;
+  if (type == 'ASE') {
+    url = 'https://api.indix.com/' + VERSION + '/bulk/ase/' + jobID + '/download?app_key=' + appKey;
   } else {
-    url = 'https://api.indix.com/' + VERSION + '/bulk/jobs/' + jobID + '/download?app_id=' + appID + '&app_key=' + appKey;
+    url = 'https://api.indix.com/' + VERSION + '/bulk/jobs/' + jobID + '/download?app_key=' + appKey;
   }
 
   let writeStream = fs.createWriteStream(fileNameGzip);
   request(url).pipe(writeStream);
 
-  return new Promise(function (fulfill, reject){
+  return new Promise((resolve, reject) => {
 
-    writeStream.on('finish', function(){
-
+    writeStream.on('finish', () => {
       fs.createReadStream(fileNameGzip)
         .pipe(zlib.createUnzip())
         .pipe(
-          fs.createWriteStream(fileNameUnzip)
-            .on('finish', function(){
-
-              let products = [];
-
-              let stream = byline(fs.createReadStream(fileNameUnzip, { encoding: 'utf8' }));
-              stream
-                .on('data', function(line) {
-                  products.push(JSON.parse(line));
-                })
-                .on('end', function() {
-                  fulfill(products);
-                });
-
-            })
+        fs.createWriteStream(fileNameUnzip)
+          .on('finish', () => {
+            let products: Array<Object> = [];
+            let stream = byline(fs.createReadStream(fileNameUnzip, { encoding: 'utf8' }));
+            stream
+              .on('data', (line: string) => {
+                products.push(JSON.parse(line));
+              })
+              .on('end', function () {
+                resolve(products);
+              });
+          })
         );
-
     });
-
   });
-
 }
 
-export function downloadProducts(jobID){
+export function downloadProducts(jobID: string) {
   return _downloadProducts(jobID);
 }
 
-export function downloadASEProducts(jobID){
+export function downloadASEProducts(jobID: string) {
   return _downloadProducts(jobID, 'ASE');
 }
