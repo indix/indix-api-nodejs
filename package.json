@@ -4,6 +4,9 @@
   "description": "Indix API NodeJS Client",
   "main": "lib/indix-api.js",
   "typings": "lib/indix-api.d.ts",
+  "files": [
+    "lib/"
+  ],
   "scripts": {
     "tdd": "./node_modules/.bin/mocha test/*-test.js --compilers js:babel-register --watch",
     "test": "./node_modules/.bin/mocha test/*-test.js --compilers js:babel-register --timeout 5000",
