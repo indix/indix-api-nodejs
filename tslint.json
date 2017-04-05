@@ -4,7 +4,7 @@
     "max-line-length": [
       200
     ],
-    "prefer-array-literals": [
+    "prefer-array-literal": [
       true,
       {
         "allow-type-parameters": true
